@@ -1,0 +1,58 @@
+services:
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend-dev
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - ./data/db:/backend/data/db
+      - ./data/env:/env
+      - ./data/logs:/backend/data/logs
+      - ./data/storage:/backend/data/storage
+    environment:
+      - PATH_TO_DB=/backend/data/db/db.sqlite3
+      - PATH_TO_ENV=/env
+      - PATH_TO_STORAGE=/backend/data/storage
+      - SSL_CERT=certfile.crt
+      - SSL_KEY=keyfile.key
+      - PATH_TO_LOGS=/backend/data/logs
+      - BACKEND_LOG=backend.log
+    env_file:
+      - .env
+    networks:
+      network:
+        ipv4_address: 172.16.1.11
+    develop:
+      watch:
+        - action: rebuild
+          path: ./backend
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend-dev
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - ./data/env:/env
+      - ./data/storage:/usr/share/nginx/html/storage/storage
+      - ./frontend/assets:/usr/share/nginx/html/storage/assets
+    env_file:
+      - .env
+    networks:
+      network:
+        ipv4_address: 172.16.1.10
+    depends_on:
+      - backend
+    develop:
+      watch:
+        - action: rebuild
+          path: ./frontend
+
+networks:
+  network:
+    ipam:
+      config:
+        - subnet: 172.16.1.0/24
