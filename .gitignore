@@ -1,2 +1,13 @@
-node_modules
+*.crt
+*.key
+*.log
+*.pem
+*.sqlite3
+.env
+cache
+data
+db
 dist
+env
+node_modules
+storage
