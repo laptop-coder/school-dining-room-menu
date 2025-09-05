@@ -7,8 +7,13 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-// TODO: add initial queries
 var initialQueries = `
+CREATE TABLE IF NOT EXISTS dish (
+    dish_id INTEGER PRIMARY KEY,
+    publication_datetime DATETIME NOT NULL,
+    name VARCHAR(400) NOT NULL,
+    available INTEGER NOT NULL DEFAULT 1
+);
 `
 
 func initDB() *sql.DB {
