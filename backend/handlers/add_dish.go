@@ -26,12 +26,14 @@ func AddDish(w http.ResponseWriter, r *http.Request) {
 	dishName := r.FormValue("dishName")
 	dishCategory := r.FormValue("dishCategory")
 	dishDescription := r.FormValue("dishDescription")
+	dishPhoto := r.FormValue("dishPhoto")
 	if dishName == "" || dishCategory == "" {
 		msg := "Error. POST parameters \"dishName\" and \"dishCategory\" are required"
 		Logger.Error(msg)
 		http.Error(w, msg, http.StatusBadRequest)
 		return
 	}
+	dishId := uuid.New().String()
 	sqlQuery := fmt.Sprintf(`
 	INSERT INTO dish (
 		dish_id,
@@ -44,9 +46,16 @@ func AddDish(w http.ResponseWriter, r *http.Request) {
 		'%s',
 		'%s'
 	);
-	`, uuid.New(), dishCategory, dishName, dishDescription)
+	`, dishId, dishCategory, dishName, dishDescription)
 	if _, err := DB.Exec(sqlQuery); err != nil {
 		msg := "Error adding new dish: " + err.Error()
+		Logger.Error(msg)
+		http.Error(w, msg, http.StatusInternalServerError)
+		return
+	}
+
+	if err := SaveDishPhotoToStorage(dishPhoto, dishId); err != nil {
+		msg := "Error saving dish photo to storage: " + err.Error()
 		Logger.Error(msg)
 		http.Error(w, msg, http.StatusInternalServerError)
 		return
