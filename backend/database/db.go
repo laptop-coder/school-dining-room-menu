@@ -7,12 +7,13 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
+// TODO: add length restrictions (VARCHAR(n) instead of TEXT)
 var initialQueries = `
 CREATE TABLE IF NOT EXISTS dish (
     dish_id VARCHAR(36) PRIMARY KEY,
 	dish_category VARCHAR(36) NOT NULL,
     dish_name TEXT NOT NULL,
-    dish_description TEXT NOT NULL,
+    dish_description TEXT,
     dish_available INTEGER NOT NULL DEFAULT 1,
 	FOREIGN KEY(dish_category) REFERENCES category(category_name)
 );
