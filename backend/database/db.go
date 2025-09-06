@@ -9,10 +9,16 @@ import (
 
 var initialQueries = `
 CREATE TABLE IF NOT EXISTS dish (
-    dish_id INTEGER PRIMARY KEY,
-    publication_datetime DATETIME NOT NULL,
-    name VARCHAR(400) NOT NULL,
-    available INTEGER NOT NULL DEFAULT 1
+    dish_id VARCHAR(36) PRIMARY KEY,
+	dish_category VARCHAR(36) NOT NULL,
+    dish_name TEXT NOT NULL,
+    dish_description TEXT NOT NULL,
+    dish_available INTEGER NOT NULL DEFAULT 1,
+	FOREIGN KEY(dish_category) REFERENCES category(category_name)
+);
+
+CREATE TABLE IF NOT EXISTS category (
+    category_name VARCHAR(36) PRIMARY KEY
 );
 `
 
