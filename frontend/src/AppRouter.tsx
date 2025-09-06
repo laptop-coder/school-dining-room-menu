@@ -1,14 +1,17 @@
-import { JSX } from "solid-js";
+import { JSX } from 'solid-js';
 
-import { Router, Route } from "@solidjs/router";
+import { Router, Route } from '@solidjs/router';
 
-import HomePage from "./pages/Home";
-import { HOME_ROUTE } from "./utils/consts";
+import HomePage from './pages/Home';
+import { HOME_ROUTE } from './utils/consts';
 
 const AppRouter = (): JSX.Element => {
   return (
     <Router>
-      <Route path={HOME_ROUTE} component={HomePage} />
+      <Route
+        path={HOME_ROUTE}
+        component={HomePage}
+      />
     </Router>
   );
 };
