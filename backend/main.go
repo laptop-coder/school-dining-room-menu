@@ -11,7 +11,12 @@ import (
 func main() {
 	defer DB.Close()
 
-	http.HandleFunc("/get_dishes_list", handlers.GetDishesList)
+	http.HandleFunc("/category/add", handlers.AddCategory)
+	http.HandleFunc("/categories/get_list", handlers.GetCategoriesList)
+	http.HandleFunc("/dish/add", handlers.AddDish)
+	http.HandleFunc("/dish/change_availability", handlers.ChangeDishAvailability)
+	http.HandleFunc("/dish/delete", handlers.DeleteDish)
+	http.HandleFunc("/dishes/get_list", handlers.GetDishesList)
 
 	Logger.Info("Starting server")
 	err := http.ListenAndServeTLS(":443", Cfg.SSL.PathToCert, Cfg.SSL.PathToKey, nil)
