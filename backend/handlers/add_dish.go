@@ -26,6 +26,12 @@ func AddDish(w http.ResponseWriter, r *http.Request) {
 	dishName := r.FormValue("dishName")
 	dishCategory := r.FormValue("dishCategory")
 	dishDescription := r.FormValue("dishDescription")
+	if dishName == "" || dishCategory == "" {
+		msg := "Error. POST parameters \"dishName\" and \"dishCategory\" are required"
+		Logger.Error(msg)
+		http.Error(w, msg, http.StatusBadRequest)
+		return
+	}
 	sqlQuery := fmt.Sprintf(`
 	INSERT INTO dish (
 		dish_id,
