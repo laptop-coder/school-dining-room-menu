@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	. "backend/config"
 	. "backend/database"
 	. "backend/logger"
 	. "backend/utils"
@@ -34,6 +35,18 @@ func DeleteDish(w http.ResponseWriter, r *http.Request) {
 	`, dishId)
 	if _, err := DB.Exec(sqlQuery); err != nil {
 		msg := "Error deleting dish: " + err.Error()
+		Logger.Error(msg)
+		http.Error(w, msg, http.StatusInternalServerError)
+		return
+	}
+
+	pathToPhoto := fmt.Sprintf(
+		"%s/%s.jpeg",
+		Cfg.Storage.PathTo,
+		dishId,
+	)
+	if err := DeleteDishPhotoFromStorageIfExists(pathToPhoto); err != nil {
+		msg := "Error deleting dish photo from storage: " + err.Error()
 		Logger.Error(msg)
 		http.Error(w, msg, http.StatusInternalServerError)
 		return
