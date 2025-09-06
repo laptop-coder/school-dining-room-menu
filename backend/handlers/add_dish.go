@@ -44,7 +44,7 @@ func AddDish(w http.ResponseWriter, r *http.Request) {
 		'%s',
 		'%s'
 	);
-	`, uuid.New(), dishName, dishCategory, dishDescription)
+	`, uuid.New(), dishCategory, dishName, dishDescription)
 	if _, err := DB.Exec(sqlQuery); err != nil {
 		msg := "Error adding new dish: " + err.Error()
 		Logger.Error(msg)
