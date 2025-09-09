@@ -6,6 +6,7 @@ import Footer from '../components/Footer/Footer';
 import Header from '../components/Header/Header';
 import AvailabilityToggle from '../components/AvailabilityToggle';
 import CategoryToggle from '../components/CategoryToggle';
+import Content from '../components/Content/Content';
 
 const HomePage = (): JSX.Element => {
   const [available, setAvailable] = createSignal('');
@@ -13,12 +14,14 @@ const HomePage = (): JSX.Element => {
   return (
     <Page>
       <Header />
-      <AvailabilityToggle setter={setAvailable} />
-      <CategoryToggle setter={setCategory} />
-      <DishesList
-        category={category}
-        available={available}
-      />
+      <Content>
+        <AvailabilityToggle setter={setAvailable} />
+        <CategoryToggle setter={setCategory} />
+        <DishesList
+          category={category}
+          available={available}
+        />
+      </Content>
       <Footer />
     </Page>
   );

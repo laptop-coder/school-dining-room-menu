@@ -2,7 +2,5 @@
   display: flex;
   gap: 20px;
   justify-content: center;
-  flex-grow: 1;
   flex-wrap: wrap;
-  height: 100%;
 }
