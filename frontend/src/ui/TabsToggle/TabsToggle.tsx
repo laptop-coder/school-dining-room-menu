@@ -1,6 +1,7 @@
 import { JSX, createSignal, onMount, For, createEffect } from 'solid-js';
 import type { Signal, Setter } from 'solid-js';
 
+import TabsToggleWrapper from '../TabsToggleWrapper/TabsToggleWrapper'
 import styles from './TabsToggle.module.css';
 
 import { Motion } from 'solid-motionone';
@@ -23,7 +24,7 @@ const TabsToggle = (props: {
   });
   props.setter(props.tabs[0]);
   return (
-    <div class={styles.tabs_toggle}>
+    <TabsToggleWrapper>
       <div class={styles.tabs}>
         <For each={props.tabs}>
           {(tab, index) => (
@@ -46,7 +47,7 @@ const TabsToggle = (props: {
         transition={{ duration: 0.3 }}
         class={styles.pointer}
       />
-    </div>
+    </TabsToggleWrapper>
   );
 };
 

@@ -1,9 +1,3 @@
-.tabs_toggle {
-  position: relative;
-  background-color: var(--indigo);
-  height: 100px;
-}
-
 .tabs {
   display: flex;
   align-items: center;

@@ -1,0 +1,5 @@
+.tabs_toggle_wrapper {
+  position: relative;
+  background-color: var(--indigo);
+  height: 100px;
+}
