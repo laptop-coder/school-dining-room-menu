@@ -6,6 +6,7 @@ import (
 	"backend/types"
 	. "backend/utils"
 	"encoding/json"
+	"fmt"
 	"net/http"
 )
 
@@ -19,9 +20,19 @@ func GetDishesList(w http.ResponseWriter, r *http.Request) {
 	}
 	w.Header().Set("Content-Type", "application/json")
 
+	dishesCategory := r.URL.Query().Get("category")
+	dishesAvailable := r.URL.Query().Get("available")
+
 	// Get data from the database
 
-	sqlQuery := "SELECT * FROM dish ORDER BY dish_name;"
+	sqlQueryPart := ""
+	if dishesAvailable != "-1" {
+		sqlQueryPart = fmt.Sprintf(" AND dish_available='%s'", dishesAvailable)
+	}
+
+	sqlQuery := fmt.Sprintf("SELECT * FROM dish WHERE dish_category='%s'%s ORDER BY dish_name;", dishesCategory, sqlQueryPart)
+	Logger.Info(sqlQueryPart)
+	Logger.Info(sqlQuery)
 	if rows, err := DB.Query(sqlQuery); err != nil {
 		msg := "Error getting dishes list from the database: " + err.Error()
 		Logger.Error(msg)
