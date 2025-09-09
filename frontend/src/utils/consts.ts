@@ -4,3 +4,4 @@ export const HOME_ROUTE = '/';
 export const ASSETS_ROUTE = '/storage/assets';
 export const STORAGE_ROUTE = '/storage/storage';
 export const BACKEND_URL = 'https://server.school-dining-room-menu.ru';
+export const SCHOOL_URL = 'https://лицей369.рф';
