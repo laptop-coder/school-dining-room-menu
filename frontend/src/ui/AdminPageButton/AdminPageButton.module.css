@@ -1,0 +1,15 @@
+.admin_page_button {
+  display: flex;
+  width: 40%;
+  max-width: 370px;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 1/1;
+  background-color: var(--indigo);
+  border: none;
+  color: var(--white);
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 20px;
+}
