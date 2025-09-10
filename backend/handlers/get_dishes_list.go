@@ -31,8 +31,6 @@ func GetDishesList(w http.ResponseWriter, r *http.Request) {
 	}
 
 	sqlQuery := fmt.Sprintf("SELECT * FROM dish WHERE dish_category='%s'%s ORDER BY dish_name;", dishesCategory, sqlQueryPart)
-	Logger.Info(sqlQueryPart)
-	Logger.Info(sqlQuery)
 	if rows, err := DB.Query(sqlQuery); err != nil {
 		msg := "Error getting dishes list from the database: " + err.Error()
 		Logger.Error(msg)
