@@ -7,6 +7,7 @@ const AvailabilityToggle = (props: { setter: Setter<string> }): JSX.Element => (
   <TabsToggle
     tabs={['Доступно сейчас', 'Нет в наличии', 'Полное меню']}
     setter={props.setter}
+    tabsHTMLElementId='availability_toggle'
   />
 );
 

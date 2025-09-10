@@ -3,4 +3,5 @@
   background-color: var(--indigo);
   height: 100px;
   width: 100%;
+  overflow-x: auto;
 }
