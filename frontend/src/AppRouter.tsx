@@ -5,6 +5,7 @@ import { Router, Route } from '@solidjs/router';
 import HomePage from './pages/Home';
 import AdminPage from './pages/Admin';
 import CategoryManagementPage from './pages/CategoryManagement';
+import AddCategoryPage from './pages/AddCategory';
 import DishManagementPage from './pages/DishManagement';
 import DishAvailabilityManagementPage from './pages/DishAvailabilityManagement';
 import {
@@ -13,6 +14,7 @@ import {
   CATEGORY_MANAGEMENT_ROUTE,
   DISH_MANAGEMENT_ROUTE,
   DISH_AVAILABILITY_MANAGEMENT_ROUTE,
+  ADD_CATEGORY_ROUTE,
 } from './utils/consts';
 
 const AppRouter = (): JSX.Element => {
@@ -33,6 +35,10 @@ const AppRouter = (): JSX.Element => {
       <Route
         path={DISH_MANAGEMENT_ROUTE}
         component={DishManagementPage}
+      />
+      <Route
+        path={ADD_CATEGORY_ROUTE}
+        component={AddCategoryPage}
       />
       <Route
         path={ADMIN_ROUTE}

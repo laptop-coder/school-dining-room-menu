@@ -4,6 +4,7 @@ export const CATEGORY_MANAGEMENT_ROUTE = ADMIN_ROUTE + '/category_management';
 export const DISH_MANAGEMENT_ROUTE = ADMIN_ROUTE + '/dish_management';
 export const DISH_AVAILABILITY_MANAGEMENT_ROUTE =
   ADMIN_ROUTE + '/dish_availability_management';
+export const ADD_CATEGORY_ROUTE = ADMIN_ROUTE + '/add_category';
 
 export const ASSETS_ROUTE = '/storage/assets';
 export const STORAGE_ROUTE = '/storage/storage';
