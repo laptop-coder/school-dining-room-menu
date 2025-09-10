@@ -2,7 +2,7 @@ import axiosInstance from './axiosInstance';
 
 const deleteCategory = async (props: {
   categoryName: string;
-  reloadCategoriesList: () => {};
+  reloadCategoriesList: Function;
 }) =>
   axiosInstance
     .post(

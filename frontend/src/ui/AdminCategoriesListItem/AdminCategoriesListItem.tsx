@@ -5,7 +5,7 @@ import deleteCategory from '../../utils/deleteCategory';
 
 const AdminCategoriesListItem = (props: {
   categoryName: string;
-  reloadCategoriesList: () => {};
+  reloadCategoriesList: Function;
 }): JSX.Element => {
   return (
     <div
