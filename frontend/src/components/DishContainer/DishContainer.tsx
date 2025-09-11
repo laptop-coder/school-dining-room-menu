@@ -27,12 +27,14 @@ const DishContainer = (props: Dish & { onclick?: Function }): JSX.Element => {
     >
       <h2 class={styles.dish_container_title}>{props.DishName}</h2>
       <div class={styles.dish_container_content}>
-        <DishContainerItem
-          pathToImage={`${ASSETS_ROUTE}/description.svg`}
-          title={`${props.DishName} (описание)`}
-        >
-          {props.DishDescription}
-        </DishContainerItem>
+        {props.DishDescription !== '' && (
+          <DishContainerItem
+            pathToImage={`${ASSETS_ROUTE}/description.svg`}
+            title={`${props.DishName} (описание)`}
+          >
+            {props.DishDescription}
+          </DishContainerItem>
+        )}
         {props.DishAvailable !== '' && (
           <DishContainerItem
             pathToImage={`${ASSETS_ROUTE}/available.svg`}
