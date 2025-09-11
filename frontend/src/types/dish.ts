@@ -4,6 +4,7 @@ interface Dish {
   DishName: string;
   DishDescription: string;
   DishAvailable: string;
+  DishPhoto?: string;
 }
 
 export default Dish;
