@@ -9,7 +9,7 @@ import DishContainerItem from '../../ui/DishContainerItem/DishContainerItem';
 
 import { Motion } from 'solid-motionone';
 
-const DishContainer = (props: Dish): JSX.Element => {
+const DishContainer = (props: Dish & { onclick?: Function }): JSX.Element => {
   const pathToPhoto = `${STORAGE_ROUTE}/${props.DishId}.jpeg`;
   const [dishPhotoIsAvailable, setDishPhotoIsAvailable] = createSignal(false);
   checkPhotoAvailability({
@@ -22,6 +22,8 @@ const DishContainer = (props: Dish): JSX.Element => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
+      onclick={props.onclick}
+      style={props.onclick && { cursor: 'pointer' }}
     >
       <h2 class={styles.dish_container_title}>{props.DishName}</h2>
       <div class={styles.dish_container_content}>
