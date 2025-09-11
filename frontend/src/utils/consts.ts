@@ -5,6 +5,7 @@ export const DISH_MANAGEMENT_ROUTE = ADMIN_ROUTE + '/dish_management';
 export const DISH_AVAILABILITY_MANAGEMENT_ROUTE =
   ADMIN_ROUTE + '/dish_availability_management';
 export const ADD_CATEGORY_ROUTE = ADMIN_ROUTE + '/add_category';
+export const ADD_DISH_ROUTE = ADMIN_ROUTE + '/add_dish';
 
 export const ASSETS_ROUTE = '/storage/assets';
 export const STORAGE_ROUTE = '/storage/storage';
