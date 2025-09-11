@@ -54,11 +54,13 @@ func AddDish(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err := SaveDishPhotoToStorage(dishPhoto, dishId); err != nil {
-		msg := "Error saving dish photo to storage: " + err.Error()
-		Logger.Error(msg)
-		http.Error(w, msg, http.StatusInternalServerError)
-		return
+	if dishPhoto != "" {
+		if err := SaveDishPhotoToStorage(dishPhoto, dishId); err != nil {
+			msg := "Error saving dish photo to storage: " + err.Error()
+			Logger.Error(msg)
+			http.Error(w, msg, http.StatusInternalServerError)
+			return
+		}
 	}
 
 	msg := "Success. Added new dish"
