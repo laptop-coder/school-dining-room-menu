@@ -1,5 +1,6 @@
 .dish_photo {
-  border: none;
+  border: 1px solid var(--gray);
   border-radius: 5px;
   cursor: pointer;
+  width: 100%;
 }
