@@ -9,8 +9,7 @@ const DishAvailabilityManagementPage = (): JSX.Element => {
   return (
     <Page>
       <Header admin />
-      <Content>
-      </Content>
+      <Content></Content>
       <Footer />
     </Page>
   );

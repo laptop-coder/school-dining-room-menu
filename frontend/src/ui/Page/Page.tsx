@@ -6,4 +6,4 @@ const Page = (props: ParentProps): JSX.Element => {
   return <div class={styles.page}>{props.children}</div>;
 };
 
-export default Page
+export default Page;
