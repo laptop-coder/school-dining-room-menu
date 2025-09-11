@@ -6,8 +6,11 @@ import addCategory from '../utils/addCategory';
 
 const AddCategoryForm = (): JSX.Element => {
   const [categoryName, setCategoryName] = createSignal('');
-  const handleSubmit = () => {
-    addCategory({ categoryName: categoryName() });
+  const handleSubmit = (event: SubmitEvent) => {
+    event.preventDefault();
+    if (categoryName() !== '') {
+      addCategory({ categoryName: categoryName() });
+    }
   };
   return (
     <Form onsubmit={handleSubmit}>
