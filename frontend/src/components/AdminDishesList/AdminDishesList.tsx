@@ -18,7 +18,7 @@ import NoData from '../../ui/NoData/NoData';
 import AdminAddItemButton from '../../ui/AdminAddItemButton/AdminAddItemButton';
 import { ADD_DISH_ROUTE } from '../../utils/consts';
 import type Dish from '../../types/dish';
-import DishContainer from '../../components/DishContainer/DishContainer';
+import DishContainer from '../DishContainer/DishContainer';
 
 const AdminDishesList = (props: {
   category: Accessor<string>;
