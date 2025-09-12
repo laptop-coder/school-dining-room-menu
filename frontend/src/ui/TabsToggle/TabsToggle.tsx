@@ -65,7 +65,7 @@ const TabsToggle = (props: {
           {(tab, index) => (
             <button
               ref={(el) => (tabsRefs[index()] = el)}
-              onClick={() => {
+              onclick={() => {
                 setActiveTab(index());
                 props.setter(props.tabs[index()]);
               }}
