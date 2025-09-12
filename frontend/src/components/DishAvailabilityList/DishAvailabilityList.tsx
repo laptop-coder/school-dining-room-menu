@@ -6,6 +6,7 @@ import {
   createEffect,
   Switch,
   Match,
+  onMount,
 } from 'solid-js';
 import type { Accessor, ResourceReturn } from 'solid-js';
 
@@ -16,6 +17,8 @@ import DishAvailabilityListItem from '../../ui/DishAvailabilityListItem/DishAvai
 import Loading from '../../ui/Loading/Loading';
 import Error from '../../ui/Error/Error';
 import NoData from '../../ui/NoData/NoData';
+import AdminActionButton from '../../ui/AdminActionButton/AdminActionButton';
+import { ASSETS_ROUTE } from '../../utils/consts';
 
 const DishAvailabilityList = (props: {
   category: Accessor<string>;
@@ -42,8 +45,56 @@ const DishAvailabilityList = (props: {
       });
     }
   });
+
+  // Fullscreen
+
+  const [isFullscreen, setIsFullscreen] = createSignal(false);
+
+  var contentElement: HTMLElement | null;
+  onMount(() => {
+    contentElement = document.getElementById('content');
+  });
+
+  createEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(document.fullscreenElement === contentElement);
+    };
+
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    document.addEventListener('mozfullscreenchange', handleFullscreenChange);
+    document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+    document.addEventListener('msfullscreenchange', handleFullscreenChange);
+
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+      document.removeEventListener(
+        'mozfullscreenchange',
+        handleFullscreenChange,
+      );
+      document.removeEventListener(
+        'webkitfullscreenchange',
+        handleFullscreenChange,
+      );
+      document.removeEventListener(
+        'msfullscreenchange',
+        handleFullscreenChange,
+      );
+    };
+  });
+
   return (
     <div class={styles.dish_availability_list}>
+      {!isFullscreen() && (
+        <AdminActionButton
+          action={() => {
+            if (contentElement) {
+              contentElement.requestFullscreen();
+            }
+          }}
+          title='Перейти в полноэкранный режим'
+          pathToImage={`${ASSETS_ROUTE}/fullscreen.svg`}
+        />
+      )}
       {/*TODO: is it normal to use Loading in the fallback here?*/}
       <Switch fallback={<Loading />}>
         <Match when={state() === 'unresolved' || state() === 'pending'}>
