@@ -9,6 +9,8 @@ import AddCategoryPage from './pages/AddCategory';
 import AddDishPage from './pages/AddDish';
 import DishManagementPage from './pages/DishManagement';
 import DishAvailabilityManagementPage from './pages/DishAvailabilityManagement';
+import AdminLoginPage from './pages/AdminLogin';
+import AdminRegisterPage from './pages/AdminRegister';
 import {
   HOME_ROUTE,
   ADMIN_ROUTE,
@@ -17,6 +19,8 @@ import {
   DISH_AVAILABILITY_MANAGEMENT_ROUTE,
   ADD_CATEGORY_ROUTE,
   ADD_DISH_ROUTE,
+  ADMIN_LOGIN_ROUTE,
+  ADMIN_REGISTER_ROUTE,
 } from './utils/consts';
 
 const AppRouter = (): JSX.Element => {
@@ -45,6 +49,14 @@ const AppRouter = (): JSX.Element => {
       <Route
         path={ADD_DISH_ROUTE}
         component={AddDishPage}
+      />
+      <Route
+        path={ADMIN_LOGIN_ROUTE}
+        component={AdminLoginPage}
+      />
+      <Route
+        path={ADMIN_REGISTER_ROUTE}
+        component={AdminRegisterPage}
       />
       <Route
         path={ADMIN_ROUTE}

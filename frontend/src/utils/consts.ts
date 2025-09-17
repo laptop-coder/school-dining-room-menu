@@ -1,4 +1,6 @@
 export const ADMIN_ROUTE = '/' + import.meta.env.VITE_ADMIN_URL_UUID;
+export const ADMIN_LOGIN_ROUTE = ADMIN_ROUTE + '/login';
+export const ADMIN_REGISTER_ROUTE = ADMIN_ROUTE + '/register';
 export const HOME_ROUTE = '/';
 export const CATEGORY_MANAGEMENT_ROUTE = ADMIN_ROUTE + '/category_management';
 export const DISH_MANAGEMENT_ROUTE = ADMIN_ROUTE + '/dish_management';
