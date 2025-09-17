@@ -16,6 +16,11 @@ type LogsConfig struct {
 	PathToBackend string
 }
 
+type RSAConfig struct {
+	PathToPrivateKey string
+	PathToPublicKey  string
+}
+
 type SSLConfig struct {
 	PathToCert string
 	PathToKey  string
@@ -30,6 +35,7 @@ type Config struct {
 	DB      DBConfig
 	Env     EnvConfig
 	Logs    LogsConfig
+	RSA     RSAConfig
 	SSL     SSLConfig
 	Storage StorageConfig
 }

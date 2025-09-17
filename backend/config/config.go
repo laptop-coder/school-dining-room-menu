@@ -24,6 +24,16 @@ func newConfig() *types.Config {
 				getEnv("BACKEND_LOG"),
 			),
 		},
+		RSA: types.RSAConfig{
+			PathToPrivateKey: filepath.Join(
+				getEnv("PATH_TO_ENV"),
+				getEnv("RSA_PRIVATE_KEY"),
+			),
+			PathToPublicKey: filepath.Join(
+				getEnv("PATH_TO_ENV"),
+				getEnv("RSA_PUBLIC_KEY"),
+			),
+		},
 		SSL: types.SSLConfig{
 			PathToCert: filepath.Join(
 				getEnv("PATH_TO_ENV"),
