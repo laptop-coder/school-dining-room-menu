@@ -83,7 +83,7 @@ const DishAvailabilityList = (props: {
   });
 
   return (
-    <div class={styles.dish_availability_list}>
+    <div class={styles.dish_availability_list_wrapper}>
       {!isFullscreen() && (
         <AdminActionButton
           action={() => {
@@ -95,32 +95,34 @@ const DishAvailabilityList = (props: {
           pathToImage={`${ASSETS_ROUTE}/fullscreen.svg`}
         />
       )}
-      {/*TODO: is it normal to use Loading in the fallback here?*/}
-      <Switch fallback={<Loading />}>
-        <Match when={state() === 'unresolved' || state() === 'pending'}>
-          <Loading />
-        </Match>
-        <Match when={state() === 'ready' || state() === 'refreshing'}>
-          <For
-            each={data() as Dish[]}
-            fallback={<NoData />}
-          >
-            {(item: Dish) => (
-              <DishAvailabilityListItem
-                {...{
-                  dishId: item.DishId,
-                  dishName: item.DishName,
-                  dishAvailable: item.DishAvailable as '0' | '1',
-                  reloadDishesList: reloadDishesList,
-                }}
-              />
-            )}
-          </For>
-        </Match>
-        <Match when={state() === 'errored'}>
-          <Error />
-        </Match>
-      </Switch>
+      <div class={styles.dish_availability_list}>
+        {/*TODO: is it normal to use Loading in the fallback here?*/}
+        <Switch fallback={<Loading />}>
+          <Match when={state() === 'unresolved' || state() === 'pending'}>
+            <Loading />
+          </Match>
+          <Match when={state() === 'ready' || state() === 'refreshing'}>
+            <For
+              each={data() as Dish[]}
+              fallback={<NoData />}
+            >
+              {(item: Dish) => (
+                <DishAvailabilityListItem
+                  {...{
+                    dishId: item.DishId,
+                    dishName: item.DishName,
+                    dishAvailable: item.DishAvailable as '0' | '1',
+                    reloadDishesList: reloadDishesList,
+                  }}
+                />
+              )}
+            </For>
+          </Match>
+          <Match when={state() === 'errored'}>
+            <Error />
+          </Match>
+        </Switch>
+      </div>
     </div>
   );
 };
