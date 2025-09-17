@@ -8,6 +8,7 @@ WORKDIR /app
 COPY --from=deps /app/node_modules node_modules
 COPY vite.config.ts tsconfig.json index.html .
 COPY src src
+COPY .env .env
 RUN npx vite build
 
 FROM nginx:1.29.1-alpine3.22-slim

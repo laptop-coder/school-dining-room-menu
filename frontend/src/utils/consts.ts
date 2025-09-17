@@ -1,4 +1,4 @@
-export const ADMIN_ROUTE = '/1b75e3c7-4c17-4c5a-a701-e13953a38ad4'; // TODO: move to the .env file
+export const ADMIN_ROUTE = '/' + import.meta.env.VITE_ADMIN_URL_UUID;
 export const HOME_ROUTE = '/';
 export const CATEGORY_MANAGEMENT_ROUTE = ADMIN_ROUTE + '/category_management';
 export const DISH_MANAGEMENT_ROUTE = ADMIN_ROUTE + '/dish_management';

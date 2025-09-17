@@ -39,8 +39,6 @@ services:
       - ./data/env:/env
       - ./data/storage:/usr/share/nginx/html/storage/storage
       - ./frontend/assets:/usr/share/nginx/html/storage/assets
-    env_file:
-      - .env
     networks:
       network:
         ipv4_address: 172.16.1.10
