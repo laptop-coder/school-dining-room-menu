@@ -6,3 +6,7 @@
   align-items: center;
   background-color: var(--indigo-2);
 }
+
+.content:fullscreen {
+  overflow-y: auto;
+}

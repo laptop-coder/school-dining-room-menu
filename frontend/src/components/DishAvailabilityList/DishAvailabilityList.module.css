@@ -7,11 +7,16 @@
   gap: 40px;
 }
 
-.dish_availability_list {
+.dish_availability_list,
+.dish_availability_list_fullscreen {
   justify-content: center;
   background-color: var(--indigo-2);
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
   width: 100%;
+}
+
+.dish_availability_list_fullscreen {
+  margin-top: 100px;
 }

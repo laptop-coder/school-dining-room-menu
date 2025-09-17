@@ -9,12 +9,21 @@ import CategoryToggle from '../components/CategoryToggle';
 
 const DishAvailabilityManagementPage = (): JSX.Element => {
   const [category, setCategory] = createSignal('');
+  const [isFullscreen, setIsFullscreen] = createSignal(false);
+
   return (
     <Page>
       <Header admin />
       <Content>
-        <CategoryToggle setter={setCategory} />
-        <DishAvailabilityList category={category} />
+        <CategoryToggle
+          setter={setCategory}
+          fullscreen={isFullscreen()}
+        />
+        <DishAvailabilityList
+          category={category}
+          isFullscreen={isFullscreen}
+          setIsFullscreen={setIsFullscreen}
+        />
       </Content>
       <Footer />
     </Page>

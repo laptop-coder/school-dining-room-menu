@@ -8,7 +8,7 @@ import {
   Match,
   onMount,
 } from 'solid-js';
-import type { Accessor, ResourceReturn } from 'solid-js';
+import type { Accessor, Setter, ResourceReturn } from 'solid-js';
 
 import styles from './DishAvailabilityList.module.css';
 import fetchDishesList from '../../utils/fetchDishesList';
@@ -22,6 +22,8 @@ import { ASSETS_ROUTE } from '../../utils/consts';
 
 const DishAvailabilityList = (props: {
   category: Accessor<string>;
+  isFullscreen: Accessor<boolean>;
+  setIsFullscreen: Setter<boolean>;
 }): JSX.Element => {
   const [data, setData] = createSignal();
   const [state, setState] = createSignal();
@@ -48,8 +50,6 @@ const DishAvailabilityList = (props: {
 
   // Fullscreen
 
-  const [isFullscreen, setIsFullscreen] = createSignal(false);
-
   var contentElement: HTMLElement | null;
   onMount(() => {
     contentElement = document.getElementById('content');
@@ -57,7 +57,7 @@ const DishAvailabilityList = (props: {
 
   createEffect(() => {
     const handleFullscreenChange = () => {
-      setIsFullscreen(document.fullscreenElement === contentElement);
+      props.setIsFullscreen(document.fullscreenElement === contentElement);
     };
 
     document.addEventListener('fullscreenchange', handleFullscreenChange);
@@ -84,7 +84,7 @@ const DishAvailabilityList = (props: {
 
   return (
     <div class={styles.dish_availability_list_wrapper}>
-      {!isFullscreen() && (
+      {!props.isFullscreen() && (
         <AdminActionButton
           action={() => {
             if (contentElement) {
@@ -95,7 +95,13 @@ const DishAvailabilityList = (props: {
           pathToImage={`${ASSETS_ROUTE}/fullscreen.svg`}
         />
       )}
-      <div class={styles.dish_availability_list}>
+      <div
+        class={
+          props.isFullscreen()
+            ? styles.dish_availability_list_fullscreen
+            : styles.dish_availability_list
+        }
+      >
         {/*TODO: is it normal to use Loading in the fallback here?*/}
         <Switch fallback={<Loading />}>
           <Match when={state() === 'unresolved' || state() === 'pending'}>

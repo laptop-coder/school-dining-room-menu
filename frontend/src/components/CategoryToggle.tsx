@@ -5,7 +5,10 @@ import TabsToggle from '../ui/TabsToggle/TabsToggle';
 import fetchCategoriesList from '../utils/fetchCategoriesList';
 import TabsToggleWrapper from '../ui/TabsToggleWrapper/TabsToggleWrapper';
 
-const CategoryToggle = (props: { setter: Setter<string> }): JSX.Element => {
+const CategoryToggle = (props: {
+  setter: Setter<string>;
+  fullscreen?: boolean;
+}): JSX.Element => {
   const [categoriesList]: ResourceReturn<string[]> =
     createResource(fetchCategoriesList);
   return (
@@ -17,6 +20,7 @@ const CategoryToggle = (props: { setter: Setter<string> }): JSX.Element => {
         tabs={categoriesList() as string[]}
         setter={props.setter}
         tabsHTMLElementId='category_toggle'
+        fullscreen={props.fullscreen}
       />
     </Show>
   );

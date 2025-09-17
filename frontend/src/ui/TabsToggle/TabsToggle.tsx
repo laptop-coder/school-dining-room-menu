@@ -10,6 +10,7 @@ const TabsToggle = (props: {
   tabs: string[];
   setter: Setter<any>;
   tabsHTMLElementId: string;
+  fullscreen?: boolean;
 }): JSX.Element => {
   const [screenSize, setScreenSize] = createSignal({
     width: window.innerWidth,
@@ -56,7 +57,7 @@ const TabsToggle = (props: {
 
   props.setter(props.tabs[0]);
   return (
-    <TabsToggleWrapper>
+    <TabsToggleWrapper fullscreen={props.fullscreen}>
       <div
         class={styles.tabs}
         id={props.tabsHTMLElementId}
