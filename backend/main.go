@@ -19,9 +19,18 @@ func main() {
 	http.HandleFunc("/dish/delete", handlers.DeleteDish)
 	http.HandleFunc("/dishes/get_list", handlers.GetDishesList)
 
-	Logger.Info("Starting server")
-	err := http.ListenAndServeTLS(":443", Cfg.SSL.PathToCert, Cfg.SSL.PathToKey, nil)
-	if err != nil {
-		Logger.Error("Error starting the server: " + err.Error())
+	switch Cfg.App.DevMode {
+	case "true":
+		Logger.Info("Starting server in the DEVELOPMENT mode via HTTPS...")
+		err := http.ListenAndServeTLS(":443", Cfg.SSL.PathToCert, Cfg.SSL.PathToKey, nil)
+		if err != nil {
+			Logger.Error("Error starting the server: " + err.Error())
+		}
+	case "false":
+		Logger.Info("Starting server in the PRODUCTION mode via HTTP...")
+		err := http.ListenAndServe(":80", nil)
+		if err != nil {
+			Logger.Error("Error starting the server: " + err.Error())
+		}
 	}
 }
