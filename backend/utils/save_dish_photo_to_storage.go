@@ -14,10 +14,6 @@ import (
 	"strings"
 )
 
-// TODO: in frontend, when loading new photo from device, write to the start of
-// base64-string information like data:image/png;base64,
-//
-// POSSIBLY OUTDATED
 func SaveDishPhotoToStorage(photoBase64 string, dishId string) error {
 	// Check base64 format
 	// if photoBase64[:10] != "data:image" {
