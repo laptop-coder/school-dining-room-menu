@@ -1,0 +1,44 @@
+services:
+
+  backend:
+    image: laptopcoder/school-dining-room-menu-backend:latest
+    container_name: backend-prod
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - ./data/db:/backend/data/db
+      - ./data/env:/env
+      - ./data/logs:/backend/data/logs
+      - ./data/storage:/backend/data/storage
+    environment:
+      - PATH_TO_DB=/backend/data/db/db.sqlite3
+      - PATH_TO_ENV=/env
+      - PATH_TO_STORAGE=/backend/data/storage
+      - RSA_PRIVATE_KEY=RSA_private_key.pem
+      - RSA_PUBLIC_KEY=RSA_public_key.pem
+      - PATH_TO_LOGS=/backend/data/logs
+      - BACKEND_LOG=backend.log
+    env_file:
+      - .env
+    networks:
+      network:
+        ipv4_address: 172.16.1.11
+
+  frontend:
+    image: laptopcoder/school-dining-room-menu-frontend:latest
+    container_name: frontend-prod
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - ./data/env:/env
+      - ./data/storage:/usr/share/nginx/html/storage/storage
+      - ./frontend/assets:/usr/share/nginx/html/storage/assets
+    networks:
+      network:
+        ipv4_address: 172.16.1.10
+    depends_on:
+      - backend
+
+networks:
+  network:
+    ipam:
+      config:
+        - subnet: 172.16.1.0/24
