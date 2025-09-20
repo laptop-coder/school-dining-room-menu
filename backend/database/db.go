@@ -21,6 +21,21 @@ CREATE TABLE IF NOT EXISTS dish (
 CREATE TABLE IF NOT EXISTS category (
     category_name VARCHAR(36) PRIMARY KEY
 );
+
+CREATE TABLE IF NOT EXISTS admin (
+    username TEXT PRIMARY KEY,
+	password TEXT NOT NULL
+);
+
+CREATE TRIGGER IF NOT EXISTS limit_admin_accounts_count
+BEFORE INSERT ON admin
+FOR EACH ROW
+BEGIN
+   SELECT CASE
+	   WHEN (SELECT COUNT(*) FROM admin) = 1 THEN
+		   RAISE(ABORT, 'the admin account has already been created (you can''t create more than one account)')
+   end;
+end;
 `
 
 func initDB() *sql.DB {
@@ -38,7 +53,7 @@ func initDB() *sql.DB {
 		Logger.Info("Pinged successfully. Can connect to the database")
 	}
 	if _, err := db.Exec(initialQueries); err != nil {
-		Logger.Error("Error in running initial SQL queries")
+		Logger.Error("Error in running initial SQL queries: " + err.Error())
 		return nil
 	} else {
 		Logger.Info("Initial SQL queries completed")

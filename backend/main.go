@@ -18,6 +18,7 @@ func main() {
 	http.HandleFunc("/dish/change_availability", handlers.ChangeDishAvailability)
 	http.HandleFunc("/dish/delete", handlers.DeleteDish)
 	http.HandleFunc("/dishes/get_list", handlers.GetDishesList)
+	http.HandleFunc("/admin/register", handlers.AdminRegister)
 
 	switch Cfg.App.DevMode {
 	case "true":
