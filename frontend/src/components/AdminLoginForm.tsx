@@ -5,17 +5,47 @@ import { A } from '@solidjs/router';
 import Form from '../ui/Form/Form';
 import AdminAuthFormSubmitButton from '../ui/AdminAuthFormSubmitButton/AdminAuthFormSubmitButton';
 import Input from '../ui/Input/Input';
-import { ADMIN_REGISTER_ROUTE } from '../utils/consts';
+import {
+  ADMIN_REGISTER_ROUTE,
+  BACKEND_ADMIN_LOGIN_ROUTE,
+  ADMIN_ROUTE,
+} from '../utils/consts';
 import AdminAuthFormOtherChoice from '../ui/AdminAuthFormOtherChoice/AdminAuthFormOtherChoice';
 import AdminAuthFormTitle from '../ui/AdminAuthFormTitle/AdminAuthFormTitle';
+import axiosInstance from '../utils/axiosInstance';
 
 const AdminLoginForm = (): JSX.Element => {
   const [username, setUsername] = createSignal('');
   const [password, setPassword] = createSignal('');
 
-  const handleSubmit = (event: SubmitEvent) => {
+  const handleSubmit = async (event: SubmitEvent) => {
     event.preventDefault();
-    console.log(username(), password());
+    if (username() != '' && password() != '') {
+      await axiosInstance
+        .post(
+          BACKEND_ADMIN_LOGIN_ROUTE,
+          {
+            username: username(),
+            password: password(),
+          },
+          {
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+            },
+          },
+        )
+        .then((response) => {
+          if (response.status == 200) {
+            window.location.replace(ADMIN_ROUTE);
+          }
+        })
+        .catch((error) => {
+          alert('Ошибка отправки. Попробуйте ещё раз');
+          console.log(error);
+        });
+    } else {
+      alert('Не все поля заполнены');
+    }
   };
 
   return (

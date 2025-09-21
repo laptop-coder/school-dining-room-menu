@@ -5,18 +5,53 @@ import { A } from '@solidjs/router';
 import Form from '../ui/Form/Form';
 import AdminAuthFormSubmitButton from '../ui/AdminAuthFormSubmitButton/AdminAuthFormSubmitButton';
 import Input from '../ui/Input/Input';
-import { ADMIN_LOGIN_ROUTE } from '../utils/consts';
+import {
+  ADMIN_LOGIN_ROUTE,
+  BACKEND_ADMIN_REGISTER_ROUTE,
+} from '../utils/consts';
 import AdminAuthFormOtherChoice from '../ui/AdminAuthFormOtherChoice/AdminAuthFormOtherChoice';
 import AdminAuthFormTitle from '../ui/AdminAuthFormTitle/AdminAuthFormTitle';
+import axiosInstance from '../utils/axiosInstance';
 
 const AdminRegisterForm = (): JSX.Element => {
   const [username, setUsername] = createSignal('');
   const [password, setPassword] = createSignal('');
   const [passwordRepeat, setPasswordRepeat] = createSignal('');
 
-  const handleSubmit = (event: SubmitEvent) => {
+  const handleSubmit = async (event: SubmitEvent) => {
     event.preventDefault();
-    console.log(username(), password(), passwordRepeat());
+    if (username() != '' && password() != '' && passwordRepeat() != '') {
+      if (password() == passwordRepeat()) {
+        await axiosInstance
+          .post(
+            BACKEND_ADMIN_REGISTER_ROUTE,
+            {
+              username: username(),
+              password: password(),
+            },
+            {
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+              },
+            },
+          )
+          .then((response) => {
+            if (response.status == 200) {
+              window.location.replace(ADMIN_LOGIN_ROUTE);
+            }
+          })
+          .catch((error) => {
+            alert(
+              'Ошибка отправки. Возможно, аккаунт администратора уже создан. Если Вы уверены, что создаёте первый аккаунт, попробуйте ещё раз',
+            );
+            console.log(error);
+          });
+      } else {
+        alert('Пароли не совпадают');
+      }
+    } else {
+      alert('Не все поля заполнены');
+    }
   };
 
   return (

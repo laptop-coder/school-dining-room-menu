@@ -9,7 +9,11 @@ export const DISH_AVAILABILITY_MANAGEMENT_ROUTE =
 export const ADD_CATEGORY_ROUTE = ADMIN_ROUTE + '/add_category';
 export const ADD_DISH_ROUTE = ADMIN_ROUTE + '/add_dish';
 
+export const BACKEND_ADMIN_LOGIN_ROUTE = '/admin/login';
+export const BACKEND_ADMIN_REGISTER_ROUTE = '/admin/register';
+
 export const ASSETS_ROUTE = '/storage/assets';
 export const STORAGE_ROUTE = '/storage/storage';
+
 export const BACKEND_URL = 'https://server.school-dining-room-menu.ru';
 export const SCHOOL_URL = 'https://лицей369.рф';
