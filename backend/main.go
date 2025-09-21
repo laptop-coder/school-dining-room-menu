@@ -5,11 +5,13 @@ import (
 	. "backend/database"
 	"backend/handlers"
 	. "backend/logger"
+	"backend/utils"
 	"net/http"
 )
 
 func main() {
 	defer DB.Close()
+	utils.GenKeysIfNotExist()
 
 	http.HandleFunc("/category/add", handlers.AddCategory)
 	http.HandleFunc("/category/delete", handlers.DeleteCategory)
@@ -19,6 +21,7 @@ func main() {
 	http.HandleFunc("/dish/delete", handlers.DeleteDish)
 	http.HandleFunc("/dishes/get_list", handlers.GetDishesList)
 	http.HandleFunc("/admin/register", handlers.AdminRegister)
+	http.HandleFunc("/admin/login", handlers.AdminLogin)
 
 	switch Cfg.App.DevMode {
 	case "true":
