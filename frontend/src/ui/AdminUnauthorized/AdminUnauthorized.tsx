@@ -8,9 +8,9 @@ import { A } from '@solidjs/router';
 const AdminUnauthorized = (): JSX.Element => {
   return (
     <div class={styles.admin_unauthorized}>
-      Для доступа к этой странице необходим аккаунт администратора.
-      <A href={ADMIN_LOGIN_ROUTE}>Войдите</A> в аккаунт или
-      <A href={ADMIN_REGISTER_ROUTE}>создайте</A> новый
+      Для доступа к этой странице необходим аккаунт администратора.{' '}
+      <A href={ADMIN_LOGIN_ROUTE}>Войдите</A> в аккаунт или{' '}
+      <A href={ADMIN_REGISTER_ROUTE}>создайте</A> новый.
     </div>
   );
 };
