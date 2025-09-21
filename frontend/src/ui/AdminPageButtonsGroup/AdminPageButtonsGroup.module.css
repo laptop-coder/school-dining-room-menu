@@ -3,4 +3,8 @@
   gap: 20px;
   justify-content: center;
   flex-wrap: wrap;
+  width: 100%;
+  padding: 20px;
+  flex-grow: 1;
+  align-content: center;
 }
