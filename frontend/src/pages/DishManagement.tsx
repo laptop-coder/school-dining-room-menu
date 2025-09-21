@@ -6,11 +6,17 @@ import Header from '../components/Header/Header';
 import Content from '../components/Content/Content';
 import AdminDishesList from '../components/AdminDishesList/AdminDishesList';
 import CategoryToggle from '../components/CategoryToggle';
+import getAuthorizedCookie from '../utils/getAuthorizedCookie';
 
 const DishManagementPage = (): JSX.Element => {
   const [category, setCategory] = createSignal('');
+  const [authorized, setAuthorized] = createSignal(false);
+  getAuthorizedCookie(setAuthorized);
   return (
-    <Page>
+    <Page
+      admin
+      authorized={authorized()}
+    >
       <Header admin />
       <Content>
         <CategoryToggle setter={setCategory} />

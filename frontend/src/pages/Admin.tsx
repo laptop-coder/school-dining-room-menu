@@ -1,4 +1,4 @@
-import { JSX } from 'solid-js';
+import { JSX, createSignal } from 'solid-js';
 
 import Page from '../ui/Page/Page';
 import Footer from '../components/Footer/Footer';
@@ -11,10 +11,16 @@ import {
   DISH_MANAGEMENT_ROUTE,
   DISH_AVAILABILITY_MANAGEMENT_ROUTE,
 } from '../utils/consts';
+import getAuthorizedCookie from '../utils/getAuthorizedCookie';
 
 const AdminPage = (): JSX.Element => {
+  const [authorized, setAuthorized] = createSignal(false);
+  getAuthorizedCookie(setAuthorized);
   return (
-    <Page>
+    <Page
+      admin
+      authorized={authorized()}
+    >
       <Header admin />
       <Content>
         <AdminPageButtonsGroup>

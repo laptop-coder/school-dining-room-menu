@@ -1,0 +1,14 @@
+.admin_unauthorized {
+  display: flex;
+  gap: 5px;
+  color: var(--white);
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  min-height: 100vh;
+}
+
+/*TODO: move "a" to the main .css file (apply gray color to all "a" elements)*/
+.admin_unauthorized a {
+  color: var(--gray);
+}

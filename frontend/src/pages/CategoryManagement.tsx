@@ -1,14 +1,20 @@
-import { JSX } from 'solid-js';
+import { JSX, createSignal } from 'solid-js';
 
 import Page from '../ui/Page/Page';
 import Footer from '../components/Footer/Footer';
 import Header from '../components/Header/Header';
 import Content from '../components/Content/Content';
 import AdminCategoriesList from '../components/AdminCategoriesList/AdminCategoriesList';
+import getAuthorizedCookie from '../utils/getAuthorizedCookie';
 
 const CategoryManagementPage = (): JSX.Element => {
+  const [authorized, setAuthorized] = createSignal(false);
+  getAuthorizedCookie(setAuthorized);
   return (
-    <Page>
+    <Page
+      admin
+      authorized={authorized()}
+    >
       <Header admin />
       <Content>
         <AdminCategoriesList />
