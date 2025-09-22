@@ -30,6 +30,21 @@ func AddCategory(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// Regular expressions checks
+	// Category name
+	isText, err := IsText(categoryName)
+	if err != nil {
+		Logger.Error(err.Error())
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	if !(*isText) {
+		msg := "Error. A POST parameter \"dishName\" must consist only of letters and space/tab/enter symbols."
+		Logger.Error(msg)
+		http.Error(w, msg, http.StatusBadRequest)
+		return
+	}
+
 	sqlQuery := fmt.Sprintf(`
 	INSERT INTO category (
 		category_name
