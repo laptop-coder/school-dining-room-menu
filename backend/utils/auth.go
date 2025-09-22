@@ -1,9 +1,11 @@
 package utils
 
 import (
+	. "backend/database"
 	. "backend/logger"
 	"crypto/rsa"
 	"errors"
+	"fmt"
 	"github.com/golang-jwt/jwt/v5"
 	"net/http"
 	"time"
@@ -57,6 +59,20 @@ func VerifyJWTAccess(accessToken *string, publicKey *rsa.PublicKey) (*string, er
 	}
 }
 
+func checkAdminAccountExistence(username *string) (*bool, error) {
+	exists := false
+	sqlQuery := fmt.Sprintf("SELECT COUNT(*) FROM admin WHERE username='%s';", *username)
+	row := DB.QueryRow(sqlQuery)
+	var count int
+	if err := row.Scan(&count); err != nil {
+		return &exists, err
+	}
+	if count == 1 {
+		exists = true
+	}
+	return &exists, nil
+}
+
 func AuthMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		publicKey, _, err := GetPublicKey()
@@ -78,8 +94,23 @@ func AuthMiddleware(next http.Handler) http.Handler {
 			accessToken = &accessTokenCookie.Value
 		}
 
-		if _, err := VerifyJWTAccess(accessToken, publicKey); err != nil {
+		adminUsername, err := VerifyJWTAccess(accessToken, publicKey)
+		if err != nil {
 			msg := "JWT access verification error: " + err.Error()
+			Logger.Error(msg)
+			http.Error(w, msg, http.StatusUnauthorized)
+			return
+		}
+
+		exists, err := checkAdminAccountExistence(adminUsername)
+		if err != nil {
+			msg := "Error checking admin account existence: " + err.Error()
+			Logger.Error(msg)
+			http.Error(w, msg, http.StatusInternalServerError)
+			return
+		}
+		if *exists == false {
+			msg := "Admin account with the username from the JWT access token does not exist"
 			Logger.Error(msg)
 			http.Error(w, msg, http.StatusUnauthorized)
 			return
