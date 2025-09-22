@@ -18,7 +18,7 @@ services:
       - PATH_TO_LOGS=/backend/data/logs
       - BACKEND_LOG=backend.log
     env_file:
-      - .env
+      - ./backend/.env
     networks:
       network:
         ipv4_address: 172.16.1.11
