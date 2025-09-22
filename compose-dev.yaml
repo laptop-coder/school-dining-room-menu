@@ -5,6 +5,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     container_name: backend-dev
+    restart: unless-stopped
     volumes:
       - /etc/localtime:/etc/localtime
       - ./data/db:/backend/data/db
@@ -36,6 +37,7 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     container_name: frontend-dev
+    restart: unless-stopped
     volumes:
       - /etc/localtime:/etc/localtime
       - ./data/env:/env

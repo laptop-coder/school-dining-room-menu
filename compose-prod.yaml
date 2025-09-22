@@ -3,6 +3,7 @@ services:
   backend:
     image: laptopcoder/school-dining-room-menu-backend:latest
     container_name: backend-prod
+    restart: always
     volumes:
       - /etc/localtime:/etc/localtime
       - ./data/db:/backend/data/db
@@ -26,6 +27,7 @@ services:
   frontend:
     image: laptopcoder/school-dining-room-menu-frontend:latest
     container_name: frontend-prod
+    restart: always
     volumes:
       - /etc/localtime:/etc/localtime
       - ./data/env:/env
