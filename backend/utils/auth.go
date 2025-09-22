@@ -57,43 +57,34 @@ func VerifyJWTAccess(accessToken *string, publicKey *rsa.PublicKey) (*string, er
 	}
 }
 
-func CheckAdminAuth(w http.ResponseWriter, r *http.Request) error {
-	// TODO: refactor the function
-	publicKey, _, err := GetPublicKey()
-	if err != nil {
-		msg := "Error getting public key: " + err.Error()
-		Logger.Error(msg)
-		http.Error(w, msg, http.StatusInternalServerError)
-		return err
-	}
-
-	var accessToken *string
-	accessTokenCookie, err := r.Cookie("jwt_access")
-	if err != nil {
-		msg := "Can't get JWT access from the cookie: " + err.Error() + ". If you are not logged in to your account yet, please log in."
-		Logger.Error(msg)
-		http.Error(w, msg, http.StatusUnauthorized)
-		return err
-	} else {
-		accessToken = &accessTokenCookie.Value
-	}
-	if _, err := VerifyJWTAccess(accessToken, publicKey); err != nil {
-		msg := "JWT access verification error: " + err.Error()
-		Logger.Error(msg)
-		http.Error(w, msg, http.StatusUnauthorized)
-		return err
-	}
-	return nil
-}
-
 func AuthMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if err := CheckAdminAuth(w, r); err != nil {
-			msg := "Error checking admin authorization status: " + err.Error()
+		publicKey, _, err := GetPublicKey()
+		if err != nil {
+			msg := "Error getting public key: " + err.Error()
+			Logger.Error(msg)
+			http.Error(w, msg, http.StatusInternalServerError)
+			return
+		}
+
+		var accessToken *string
+		accessTokenCookie, err := r.Cookie("jwt_access")
+		if err != nil {
+			msg := "Can't get JWT access from the cookie: " + err.Error() + ". If you are not logged in to your account yet, please log in."
+			Logger.Error(msg)
+			http.Error(w, msg, http.StatusUnauthorized)
+			return
+		} else {
+			accessToken = &accessTokenCookie.Value
+		}
+
+		if _, err := VerifyJWTAccess(accessToken, publicKey); err != nil {
+			msg := "JWT access verification error: " + err.Error()
 			Logger.Error(msg)
 			http.Error(w, msg, http.StatusUnauthorized)
 			return
 		}
+
 		next.ServeHTTP(w, r)
 	})
 }
