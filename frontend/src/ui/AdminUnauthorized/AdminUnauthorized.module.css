@@ -1,6 +1,8 @@
 .admin_unauthorized {
   color: var(--white);
   margin: auto 20px;
+  width: 100%;
+  text-align: center;
 }
 
 /*TODO: move "a" to the main .css file (apply gray color to all "a" elements)*/
