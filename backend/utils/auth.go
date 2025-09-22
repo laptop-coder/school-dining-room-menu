@@ -1,9 +1,11 @@
 package utils
 
 import (
+	. "backend/logger"
 	"crypto/rsa"
 	"errors"
 	"github.com/golang-jwt/jwt/v5"
+	"net/http"
 	"time"
 )
 
@@ -24,21 +26,15 @@ func parseJWT(token *string, publicKey *rsa.PublicKey) (*jwt.Token, error) {
 	keyFunc := func(token *jwt.Token) (any, error) {
 		method, ok := (*token).Method.(*jwt.SigningMethodRSA)
 		if !ok {
-			return nil, errors.New("Unexpected JWT signing method: " + token.Header["alg"].(string))
+			return nil, errors.New("unexpected JWT signing method: " + token.Header["alg"].(string))
 		}
 		if method.Alg() != "RS512" {
-			return nil, errors.New("Unsupported algorithm: " + method.Alg())
+			return nil, errors.New("unsupported algorithm: " + method.Alg())
 		}
 		return publicKey, nil
 	}
 	tokenParsed, err := jwt.Parse(*token, keyFunc)
-	if err != nil {
-		return nil, err
-	}
-	if !tokenParsed.Valid {
-		return nil, errors.New("Invalid token")
-	}
-	return tokenParsed, nil
+	return tokenParsed, err
 }
 
 func VerifyJWTAccess(accessToken *string, publicKey *rsa.PublicKey) (*string, error) {
@@ -59,4 +55,45 @@ func VerifyJWTAccess(accessToken *string, publicKey *rsa.PublicKey) (*string, er
 	default:
 		return nil, errors.New("couldn't handle JWT access token: " + err.Error())
 	}
+}
+
+func CheckAdminAuth(w http.ResponseWriter, r *http.Request) error {
+	// TODO: refactor the function
+	publicKey, _, err := GetPublicKey()
+	if err != nil {
+		msg := "Error getting public key: " + err.Error()
+		Logger.Error(msg)
+		http.Error(w, msg, http.StatusInternalServerError)
+		return err
+	}
+
+	var accessToken *string
+	accessTokenCookie, err := r.Cookie("jwt_access")
+	if err != nil {
+		msg := "Can't get JWT access from the cookie: " + err.Error() + ". If you are not logged in to your account yet, please log in."
+		Logger.Error(msg)
+		http.Error(w, msg, http.StatusUnauthorized)
+		return err
+	} else {
+		accessToken = &accessTokenCookie.Value
+	}
+	if _, err := VerifyJWTAccess(accessToken, publicKey); err != nil {
+		msg := "JWT access verification error: " + err.Error()
+		Logger.Error(msg)
+		http.Error(w, msg, http.StatusUnauthorized)
+		return err
+	}
+	return nil
+}
+
+func AuthMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if err := CheckAdminAuth(w, r); err != nil {
+			msg := "Error checking admin authorization status: " + err.Error()
+			Logger.Error(msg)
+			http.Error(w, msg, http.StatusUnauthorized)
+			return
+		}
+		next.ServeHTTP(w, r)
+	})
 }

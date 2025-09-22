@@ -29,6 +29,7 @@ func AddCategory(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, msg, http.StatusBadRequest)
 		return
 	}
+
 	sqlQuery := fmt.Sprintf(`
 	INSERT INTO category (
 		category_name
