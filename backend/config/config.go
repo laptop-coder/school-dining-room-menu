@@ -13,7 +13,7 @@ const prefixDevEnv = "DEV"
 func newConfig() *types.Config {
 	return &types.Config{
 		App: types.AppConfig{
-			DevMode: getEnv("SCHOOL_DINING_ROOM_MENU_DEV_MODE"),
+			DevMode: getEnv("DEV_MODE"),
 		},
 		DB: types.DBConfig{
 			PathTo: getEnv("PATH_TO_DB"),
