@@ -17,5 +17,5 @@ export const BACKEND_ADMIN_REGISTER_ROUTE = '/admin/register';
 export const ASSETS_ROUTE = '/storage/assets';
 export const STORAGE_ROUTE = '/storage/storage';
 
-export const BACKEND_URL = 'https://server.school-dining-room-menu.ru';
+export const BACKEND_URL = 'http://localhost:14536';
 export const SCHOOL_URL = 'https://лицей369.рф';

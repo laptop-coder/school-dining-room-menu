@@ -31,16 +31,12 @@ func main() {
 
 	switch Cfg.App.DevMode {
 	case "true":
-		Logger.Info("Starting server in the DEVELOPMENT mode via HTTPS...")
-		err := http.ListenAndServeTLS(":443", Cfg.SSL.PathToCert, Cfg.SSL.PathToKey, mux)
-		if err != nil {
-			Logger.Error("Error starting the server: " + err.Error())
-		}
+		Logger.Info("Starting server in the DEVELOPMENT mode via HTTP...")
 	case "false":
 		Logger.Info("Starting server in the PRODUCTION mode via HTTP...")
-		err := http.ListenAndServe(":80", mux)
-		if err != nil {
-			Logger.Error("Error starting the server: " + err.Error())
-		}
+	}
+	err := http.ListenAndServe(":14536", mux)
+	if err != nil {
+		Logger.Error("Error starting the server: " + err.Error())
 	}
 }

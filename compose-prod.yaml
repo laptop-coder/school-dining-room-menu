@@ -1,8 +1,18 @@
 services:
 
+  traefik:
+    image: traefik:v3.5.3
+    command:
+      - "--providers.docker=true"
+      - "--entrypoints.web.address=:80"
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
   backend:
     image: laptopcoder/school-dining-room-menu-backend:latest
-    container_name: backend-prod
+    container_name: menu-backend
     restart: always
     volumes:
       - /etc/localtime:/etc/localtime
@@ -20,13 +30,12 @@ services:
       - BACKEND_LOG=backend.log
     env_file:
       - ./backend/.env
-    networks:
-      network:
-        ipv4_address: 172.16.1.11
+    ports:
+      - "14536:14536"
 
   frontend:
     image: laptopcoder/school-dining-room-menu-frontend:latest
-    container_name: frontend-prod
+    container_name: menu-frontend
     restart: always
     volumes:
       - /etc/localtime:/etc/localtime
@@ -35,14 +44,11 @@ services:
       - ./frontend/assets:/usr/share/nginx/html/storage/assets
     env_file:
       - ./frontend/.env
-    networks:
-      network:
-        ipv4_address: 172.16.1.10
     depends_on:
       - backend
+    ports:
+      - "29157:29157"
 
 networks:
-  network:
-    ipam:
-      config:
-        - subnet: 172.16.1.0/24
+  proxy:
+    driver: bridge

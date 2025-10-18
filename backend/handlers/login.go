@@ -96,32 +96,31 @@ func AdminLogin(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
+		// TODO: "Secure: true"
 		http.SetCookie(
 			w,
 			&http.Cookie{
-				Name:        "jwt_access",
-				Value:       *accessToken,
-				Secure:      true,
-				HttpOnly:    true,
-				Partitioned: true,
-				SameSite:    http.SameSiteNoneMode,
-				Path:        "/", // TODO: is it OK?
-				Domain:      "server.school-dining-room-menu.ru",
-				Expires: time.Now().Add(time.Hour * 24 * 30), // 30 days
+				Name:     "jwt_access",
+				Value:    *accessToken,
+				HttpOnly: true,
+				Path:     "/",                                 // TODO: is it OK?
+				Expires:  time.Now().Add(time.Hour * 24 * 30), // 30 days
+				// Partitioned: true,
+				// SameSite:    http.SameSiteNoneMode,
+				// Domain:      "localhost",
 			},
 		)
 		http.SetCookie(
 			w,
 			&http.Cookie{
-				Name:        "authorized",
-				Value:       "true",
-				Secure:      true,
-				HttpOnly:    false,
-				Partitioned: true,
-				SameSite:    http.SameSiteNoneMode,
-				Path:        "/", // TODO: is it OK?
-				Domain:      "school-dining-room-menu.ru",
-				Expires: time.Now().Add(time.Hour * 24 * 30), // 30 days
+				Name:     "authorized",
+				Value:    "true",
+				HttpOnly: false,
+				Path:     "/",                                 // TODO: is it OK?
+				Expires:  time.Now().Add(time.Hour * 24 * 30), // 30 days
+				// Partitioned: true,
+				// SameSite:    http.SameSiteNoneMode,
+				// Domain:      "localhost",
 			},
 		)
 

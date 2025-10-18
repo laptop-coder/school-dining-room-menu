@@ -13,10 +13,7 @@ RUN npx vite build
 
 FROM nginx:1.29.1-alpine3.22-slim
 WORKDIR app
-COPY nginx.dev.conf .
-COPY nginx.prod.conf .
-COPY entrypoint.sh .
-RUN chmod +x entrypoint.sh
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder /app/dist /usr/share/nginx/html
-EXPOSE 443
-ENTRYPOINT ["/app/entrypoint.sh"]
+EXPOSE 29157
+CMD ["nginx", "-g", "daemon off;"]
