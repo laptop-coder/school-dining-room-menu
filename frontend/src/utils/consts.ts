@@ -1,4 +1,4 @@
-export const ADMIN_ROUTE = '/' + import.meta.env.VITE_ADMIN_URL_UUID;
+export const ADMIN_ROUTE = '/' + '1b75e3c7-4c17-4c5a-a701-e13953a38ad4';
 export const ADMIN_LOGIN_ROUTE = ADMIN_ROUTE + '/login';
 export const ADMIN_REGISTER_ROUTE = ADMIN_ROUTE + '/register';
 export const HOME_ROUTE = '/';
@@ -15,6 +15,5 @@ export const BACKEND_ADMIN_REGISTER_ROUTE = '/admin/register';
 export const ASSETS_ROUTE = '/storage/assets';
 export const STORAGE_ROUTE = '/storage/storage';
 
-export const BACKEND_URL =
-  'http://localhost:' + import.meta.env.VITE_BACKEND_PORT;
+export const BACKEND_URL = 'http://localhost:14536';
 export const SCHOOL_URL = 'https://лицей369.рф';

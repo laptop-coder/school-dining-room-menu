@@ -21,7 +21,7 @@ services:
     env_file:
       - .env
     ports:
-      - "${BACKEND_PORT:-14536}:14536"
+      - "14536:14536"
 
   frontend:
     image: laptopcoder/school-dining-room-menu-frontend:latest

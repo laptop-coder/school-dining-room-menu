@@ -10,7 +10,7 @@ import (
 func newConfig() *types.Config {
 	return &types.Config{
 		App: types.AppConfig{
-			PortBackend:  getEnv("BACKEND_PORT"),
+			PortBackend:  "14536",
 			PortFrontend: getEnv("FRONTEND_PORT"),
 		},
 		DB: types.DBConfig{

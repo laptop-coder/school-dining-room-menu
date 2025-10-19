@@ -27,7 +27,7 @@ services:
         - action: rebuild
           path: ./backend
     ports:
-      - "${BACKEND_PORT:-14536}:14536"
+      - "14536:14536"
 
   frontend:
     build:
