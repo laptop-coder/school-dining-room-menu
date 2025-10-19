@@ -37,7 +37,7 @@ services:
     depends_on:
       - backend
     ports:
-      - "${FRONTEND_PORT:-29157}:29157"
+      - "${FRONTEND_PORT:-29157}:${FRONTEND_PORT:-29157}"
 
 networks:
   proxy:
