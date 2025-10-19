@@ -13,16 +13,9 @@ func initLogger() *slog.Logger {
 		panic(err)
 	}
 
-	logLevel := new(slog.LevelVar)
-	if Cfg.App.DevMode == "true" {
-		logLevel.Set(slog.LevelDebug)
-	} else {
-		logLevel.Set(slog.LevelInfo)
-	}
-
 	wrt := io.MultiWriter(os.Stdout, logfile)
 	return slog.New(slog.NewJSONHandler(wrt, &slog.HandlerOptions{
-		Level: logLevel,
+		Level: slog.LevelInfo,
 	}))
 }
 

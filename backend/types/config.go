@@ -1,7 +1,8 @@
 package types
 
 type AppConfig struct {
-	DevMode string
+	PortBackend  string
+	PortFrontend string
 }
 
 type DBConfig struct {
@@ -21,11 +22,6 @@ type RSAConfig struct {
 	PathToPublicKey  string
 }
 
-type SSLConfig struct {
-	PathToCert string
-	PathToKey  string
-}
-
 type StorageConfig struct {
 	PathTo string
 }
@@ -36,6 +32,5 @@ type Config struct {
 	Env     EnvConfig
 	Logs    LogsConfig
 	RSA     RSAConfig
-	SSL     SSLConfig
 	Storage StorageConfig
 }

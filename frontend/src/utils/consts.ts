@@ -1,5 +1,3 @@
-export const DEV_MODE = import.meta.env.DEV_MODE;
-
 export const ADMIN_ROUTE = '/' + import.meta.env.VITE_ADMIN_URL_UUID;
 export const ADMIN_LOGIN_ROUTE = ADMIN_ROUTE + '/login';
 export const ADMIN_REGISTER_ROUTE = ADMIN_ROUTE + '/register';
@@ -17,5 +15,6 @@ export const BACKEND_ADMIN_REGISTER_ROUTE = '/admin/register';
 export const ASSETS_ROUTE = '/storage/assets';
 export const STORAGE_ROUTE = '/storage/storage';
 
-export const BACKEND_URL = 'http://localhost:14536';
+export const BACKEND_URL =
+  'http://localhost:' + import.meta.env.VITE_BACKEND_PORT;
 export const SCHOOL_URL = 'https://лицей369.рф';

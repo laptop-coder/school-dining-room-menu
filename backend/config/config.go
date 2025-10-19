@@ -5,15 +5,13 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
-	"strings"
 )
-
-const prefixDevEnv = "DEV"
 
 func newConfig() *types.Config {
 	return &types.Config{
 		App: types.AppConfig{
-			DevMode: getEnv("DEV_MODE"),
+			PortBackend:  getEnv("BACKEND_PORT"),
+			PortFrontend: getEnv("FRONTEND_PORT"),
 		},
 		DB: types.DBConfig{
 			PathTo: getEnv("PATH_TO_DB"),
@@ -37,16 +35,6 @@ func newConfig() *types.Config {
 				getEnv("RSA_PUBLIC_KEY"),
 			),
 		},
-		SSL: types.SSLConfig{
-			PathToCert: filepath.Join(
-				getEnv("PATH_TO_ENV"),
-				getEnv("DEV_SSL_CERT"),
-			),
-			PathToKey: filepath.Join(
-				getEnv("PATH_TO_ENV"),
-				getEnv("DEV_SSL_KEY"),
-			),
-		},
 		Storage: types.StorageConfig{
 			PathTo: getEnv("PATH_TO_STORAGE"),
 		},
@@ -57,9 +45,6 @@ func newConfig() *types.Config {
 func getEnv(key string) string {
 	if value, exists := os.LookupEnv(key); exists {
 		return value
-	}
-	if strings.HasPrefix(key, prefixDevEnv) {
-		return ""
 	}
 	panic(fmt.Sprintf("The required environment variable \"%s\" is not set", key))
 }

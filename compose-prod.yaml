@@ -19,9 +19,9 @@ services:
       - PATH_TO_LOGS=/backend/data/logs
       - BACKEND_LOG=backend.log
     env_file:
-      - ./backend/.env
+      - .env
     ports:
-      - "14536:14536"
+      - "${BACKEND_PORT:-14536}:14536"
 
   frontend:
     image: laptopcoder/school-dining-room-menu-frontend:latest
@@ -33,11 +33,11 @@ services:
       - ./data/storage:/usr/share/nginx/html/storage/storage
       - ./frontend/assets:/usr/share/nginx/html/storage/assets
     env_file:
-      - ./frontend/.env
+      - .env
     depends_on:
       - backend
     ports:
-      - "29157:29157"
+      - "${FRONTEND_PORT:-29157}:29157"
 
 networks:
   proxy:
