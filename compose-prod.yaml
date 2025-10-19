@@ -1,15 +1,5 @@
 services:
 
-  traefik:
-    image: traefik:v3.5.3
-    command:
-      - "--providers.docker=true"
-      - "--entrypoints.web.address=:80"
-    ports:
-      - "80:80"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-
   backend:
     image: laptopcoder/school-dining-room-menu-backend:latest
     container_name: menu-backend
