@@ -15,5 +15,4 @@ FROM nginx:1.29.1-alpine3.22-slim
 WORKDIR app
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder /app/dist /usr/share/nginx/html
-EXPOSE 29157
 CMD ["nginx", "-g", "daemon off;"]
