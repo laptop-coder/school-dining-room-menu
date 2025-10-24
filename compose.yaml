@@ -22,6 +22,8 @@ services:
       - .env
     ports:
       - "14536:14536"
+    networks:
+      - menu_network
 
   frontend:
     image: laptopcoder/school-dining-room-menu-frontend:latest
@@ -38,7 +40,9 @@ services:
       - backend
     ports:
       - "${FRONTEND_PORT:-29157}:${FRONTEND_PORT:-29157}"
+    networks:
+      - menu_network
 
 networks:
-  proxy:
+  network:
     driver: bridge

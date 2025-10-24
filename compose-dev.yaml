@@ -22,12 +22,14 @@ services:
       - BACKEND_LOG=backend.log
     env_file:
       - .env
+    ports:
+      - "14536:14536"
+    networks:
+      - menu_network
     develop:
       watch:
         - action: rebuild
           path: ./backend
-    ports:
-      - "14536:14536"
 
   frontend:
     build:
@@ -42,15 +44,17 @@ services:
       - ./frontend/assets:/usr/share/nginx/html/storage/assets
     env_file:
       - .env
+    ports:
+      - "${FRONTEND_PORT:-29157}:${FRONTEND_PORT:-29157}"
+    networks:
+      - menu_network
     depends_on:
       - backend
     develop:
       watch:
         - action: rebuild
           path: ./frontend
-    ports:
-      - "${FRONTEND_PORT:-29157}:${FRONTEND_PORT:-29157}"
 
 networks:
-  proxy:
+  menu_network:
     driver: bridge
