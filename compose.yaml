@@ -44,5 +44,5 @@ services:
       - menu_network
 
 networks:
-  network:
+  menu_network:
     driver: bridge
