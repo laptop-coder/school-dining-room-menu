@@ -6,7 +6,7 @@ import (
 )
 
 func IsText(s string) (*bool, error) {
-	result, err := regexp.MatchString("^[a-zA-Z\\s]+$", s)
+	result, err := regexp.MatchString("^[a-zA-Z\\p{Cyrillic}\\s]+$", s)
 	if err != nil {
 		return nil, errors.New("Error checking that string consist only of letters and space/tab/enter symbols: " + err.Error())
 	}
@@ -14,7 +14,7 @@ func IsText(s string) (*bool, error) {
 }
 
 func IsTextOrNumbers(s string) (*bool, error) {
-	result, err := regexp.MatchString("^[a-zA-Z0-9\\s]+$", s)
+	result, err := regexp.MatchString("^[a-zA-Z\\p{Cyrillic}0-9\\s]+$", s)
 	if err != nil {
 		return nil, errors.New("Error checking that string consist only of letters, numbers and space/tab/enter symbols: " + err.Error())
 	}
