@@ -7,4 +7,5 @@ Unit=menu_get_updates_and_restart.service
 # 02:00 UTC (05:00 MSK) +- 10 minutes
 OnCalendar=*-*-* 02:00:00
 AccuracySec=10minutes
+Persistent=false
 
