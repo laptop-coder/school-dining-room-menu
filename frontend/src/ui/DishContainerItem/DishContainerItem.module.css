@@ -2,6 +2,7 @@
   display: flex;
   gap: 5px;
   flex-direction: row;
+  white-space: pre-wrap;
 }
 
 .img {
