@@ -5,6 +5,8 @@ import {
   JSX,
   createSignal,
   createResource,
+  createEffect,
+  on,
 } from 'solid-js';
 import DishPhoto from '../ui/DishPhoto/DishPhoto';
 import Input from '../ui/Input/Input';
@@ -21,6 +23,8 @@ import Error from '../ui/Error/Error';
 import NoData from '../ui/NoData/NoData';
 import type { ResourceReturn } from 'solid-js';
 import fileToBase64 from '../utils/fileToBase64';
+import checkStringSecurity from '../utils/checkStringSecurity';
+import FormIncorrectInputMessage from '../ui/FormIncorrectInputMessage/FormIncorrectInputMessage';
 
 const AddDishForm = (props: { defaultCategory?: string }): JSX.Element => {
   const [categoriesList]: ResourceReturn<string[]> =
@@ -48,10 +52,77 @@ const AddDishForm = (props: { defaultCategory?: string }): JSX.Element => {
       addDish(data() as Dish);
     }
   };
+
+  const [dishNameEmpty, setDishNameEmpty] = createSignal(false);
+  const [dishCategoryEmpty, setDishCategoryEmpty] = createSignal(false);
+  const [dishNameForbiddenSymbols, setDishNameForbiddenSymbols] =
+    createSignal(false);
+  const [dishCategoryForbiddenSymbols, setDishCategoryForbiddenSymbols] =
+    createSignal(false);
+  const [dishDescryptionForbiddenSymbols, setDishDescriptionForbiddenSymbols] =
+    createSignal(false);
+
+  createEffect(
+    on(
+      [() => dishName(), () => dishCategory(), () => dishDescription()],
+      () => {
+        // Checks for dish name
+        if (dishName() === '') {
+          setDishNameEmpty(true);
+          setDishNameForbiddenSymbols(false);
+        } else {
+          setDishNameEmpty(false);
+          if (!checkStringSecurity(dishName())) {
+            setDishNameForbiddenSymbols(true);
+          } else {
+            setDishNameForbiddenSymbols(false);
+          }
+        }
+        // Checks for dish category (just in case)
+        if (dishCategory() === '') {
+          setDishCategoryEmpty(true);
+          setDishCategoryForbiddenSymbols(false);
+        } else {
+          setDishCategoryEmpty(false);
+          if (!checkStringSecurity(dishCategory())) {
+            setDishCategoryForbiddenSymbols(true);
+          } else {
+            setDishCategoryForbiddenSymbols(false);
+          }
+        }
+        // Checks for dish description
+        if (
+          dishDescription() !== '' &&
+          !checkStringSecurity(dishDescription())
+        ) {
+          setDishDescriptionForbiddenSymbols(true);
+        } else {
+          setDishDescriptionForbiddenSymbols(false);
+        }
+      },
+      { defer: true },
+    ),
+  );
+
   return (
     <Form onsubmit={handleSubmit}>
+      <FormIncorrectInputMessage>
+        {dishNameEmpty() && <span>Название блюда не может быть пустым</span>}
+        {dishCategoryEmpty() && (
+          <span>Категория блюда не может быть пустой</span>
+        )}
+        {dishNameForbiddenSymbols() && (
+          <span>В названии блюда используются запрещённые символы</span>
+        )}
+        {dishCategoryForbiddenSymbols() && (
+          <span>В категории блюда используются запрещённые символы</span>
+        )}
+        {dishDescryptionForbiddenSymbols() && (
+          <span>В описании блюда используются запрещённые символы</span>
+        )}
+      </FormIncorrectInputMessage>
       <Input
-        placeholder='Название блюда'
+        placeholder='Название блюда*'
         name='dish_name'
         value={dishName()}
         oninput={(event) => setDishName(event.target.value)}
@@ -76,7 +147,7 @@ const AddDishForm = (props: { defaultCategory?: string }): JSX.Element => {
             id='dish_category_select'
             value={dishCategory()}
             oninput={(event) => setDishCategory(event.target.value)}
-            label='Выберите категорию'
+            label='Выберите категорию*'
           >
             <For
               each={categoriesList()}

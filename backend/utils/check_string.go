@@ -9,7 +9,7 @@ func CheckStringSecurity(s string) (*bool, error) {
 		result := true
 		return &result, nil
 	}
-	result, err := regexp.MatchString("^[0-9A-Za-zА-Яа-яЁё:;_=,\"\\.\\?\\-\\+\\*\\(\\)\\/\\\\\\n\\r\\t]+$", s)
+	result, err := regexp.MatchString("^[0-9A-Za-zА-Яа-яЁё:;_=,\"\\.\\?\\-\\+\\*\\(\\)\\/\\\\\\n\\r\\t ]+$", s)
 	if err != nil {
 		return nil, err
 	}

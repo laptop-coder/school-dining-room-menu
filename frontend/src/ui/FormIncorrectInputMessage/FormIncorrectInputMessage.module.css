@@ -1,0 +1,6 @@
+.form_incorrect_input_message {
+  display: flex;
+  flex-direction: column;
+  color: #f00;
+  width: 100%;
+}
