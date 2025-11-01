@@ -1,29 +1,17 @@
 package utils
 
 import (
-	"errors"
 	"regexp"
 )
 
-/*
-\p{L} - any letters of any languages
-\p{Z} - any type of space characters or separators
-\p{P} - any punctuation marks
-\p{N} - any type of number marks of any languages
-*/
-
-func IsText(s string) (*bool, error) {
-	result, err := regexp.MatchString("^[\\p{L}\\p{Z}\\p{P}\\t\\r\\n]+$", s)
-	if err != nil {
-		return nil, errors.New("Error checking that string consist only of letters and space/tab/enter symbols: " + err.Error())
+func CheckStringSecurity(s string) (*bool, error) {
+	if s == "" {
+		result := true
+		return &result, nil
 	}
-	return &result, nil
-}
-
-func IsTextOrNumbers(s string) (*bool, error) {
-	result, err := regexp.MatchString("^[\\p{L}\\p{Z}\\p{P}\\p{N}\\t\\r\\n]+$", s)
+	result, err := regexp.MatchString("^[0-9A-Za-zА-Яа-яЁё:;_=,\"\\.\\?\\-\\+\\*\\(\\)\\/\\\\\\n\\r\\t]+$", s)
 	if err != nil {
-		return nil, errors.New("Error checking that string consist only of letters, numbers and space/tab/enter symbols: " + err.Error())
+		return nil, err
 	}
 	return &result, nil
 }

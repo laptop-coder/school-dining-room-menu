@@ -36,42 +36,42 @@ func AddDish(w http.ResponseWriter, r *http.Request) {
 
 	// Regular expressions checks
 	// Dish name
-	isText, err := IsText(dishName)
+	isText, err := CheckStringSecurity(dishName)
 	if err != nil {
 		Logger.Error(err.Error())
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 	if !(*isText) {
-		msg := "Error. A POST parameter \"dishName\" must consist only of letters and space/tab/enter symbols."
+		msg := "Error. Found forbidden symbols in POST parameter \"dishName\"."
 		Logger.Error(msg)
 		http.Error(w, msg, http.StatusBadRequest)
 		return
 	}
 
 	// Dish category
-	isText, err = IsText(dishCategory)
+	isText, err = CheckStringSecurity(dishCategory)
 	if err != nil {
 		Logger.Error(err.Error())
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 	if !(*isText) {
-		msg := "Error. A POST parameter \"dishName\" must consist only of letters and space/tab/enter symbols."
+		msg := "Error. Found forbidden symbols in POST parameter \"dishCategory\"."
 		Logger.Error(msg)
 		http.Error(w, msg, http.StatusBadRequest)
 		return
 	}
 
 	// Dish description
-	isTextOrNumbers, err := IsTextOrNumbers(dishDescription)
+	isTextOrNumbers, err := CheckStringSecurity(dishDescription)
 	if err != nil {
 		Logger.Error(err.Error())
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 	if !(*isTextOrNumbers) {
-		msg := "Error. A POST parameter \"dishDescription\" must consist only of letters, numbers and space/tab/enter symbols."
+		msg := "Error. Found forbidden symbols in POST parameter \"dishDescription\"."
 		Logger.Error(msg)
 		http.Error(w, msg, http.StatusBadRequest)
 		return
