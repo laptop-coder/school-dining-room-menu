@@ -104,21 +104,28 @@ const AddDishForm = (props: { defaultCategory?: string }): JSX.Element => {
     ),
   );
 
+  const dishNameEmptyMessage = 'Название блюда не может быть пустым';
+  const dishCategoryEmptyMessage = 'Категория блюда не может быть пустой';
+  const dishNameForbiddenSymbolsMessage =
+    'В названии блюда используются запрещённые символы';
+  const dishCategoryForbiddenSymbolsMessage =
+    'В категории блюда используются запрещённые символы';
+  const dishDescriptionForbiddenSymbolsMessage =
+    'В описании блюда используются запрещённые символы';
+
   return (
     <Form onsubmit={handleSubmit}>
       <FormIncorrectInputMessage>
-        {dishNameEmpty() && <span>Название блюда не может быть пустым</span>}
-        {dishCategoryEmpty() && (
-          <span>Категория блюда не может быть пустой</span>
-        )}
+        {dishNameEmpty() && <span>{dishNameEmptyMessage}</span>}
+        {dishCategoryEmpty() && <span>{dishCategoryEmptyMessage}</span>}
         {dishNameForbiddenSymbols() && (
-          <span>В названии блюда используются запрещённые символы</span>
+          <span>{dishNameForbiddenSymbolsMessage}</span>
         )}
         {dishCategoryForbiddenSymbols() && (
-          <span>В категории блюда используются запрещённые символы</span>
+          <span>{dishCategoryForbiddenSymbolsMessage}</span>
         )}
         {dishDescriptionForbiddenSymbols() && (
-          <span>В описании блюда используются запрещённые символы</span>
+          <span>{dishDescriptionForbiddenSymbolsMessage}</span>
         )}
       </FormIncorrectInputMessage>
       <Input
