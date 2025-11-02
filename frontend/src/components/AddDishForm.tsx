@@ -37,29 +37,51 @@ const AddDishForm = (props: { defaultCategory?: string }): JSX.Element => {
   const [dishDescription, setDishDescription] = createSignal('');
   const [dishPhoto, setDishPhoto] = createSignal('');
   const [data, setData] = createSignal();
+
   const handleSubmit = (event: SubmitEvent) => {
     event.preventDefault();
+
     if (dishCategory() === '') {
       setDishCategory((categoriesList() as string[])[0]);
     }
-    if (dishCategory() !== '' && dishName() !== '') {
-      setData({
-        DishCategory: dishCategory(),
-        DishName: dishName(),
-        DishDescription: dishDescription(),
-        DishPhoto: dishPhoto(),
-      });
-      addDish(data() as Dish);
+
+    // Checks
+    if (dishNameEmpty()) {
+      alert(dishNameEmptyMessage);
+      return;
+    } else if (dishCategoryEmpty()) {
+      // just in case
+      alert(dishCategoryEmptyMessage);
+      return;
+    } else if (dishNameForbiddenSymbols()) {
+      alert(dishNameForbiddenSymbolsMessage);
+      return;
+    } else if (dishCategoryForbiddenSymbols()) {
+      // just in case
+      alert(dishCategoryForbiddenSymbolsMessage);
+      return;
+    } else if (dishDescriptionForbiddenSymbols()) {
+      alert(dishDescriptionForbiddenSymbolsMessage);
+      return;
     }
+
+    setData({
+      DishCategory: dishCategory(),
+      DishName: dishName(),
+      DishDescription: dishDescription(),
+      DishPhoto: dishPhoto(),
+    });
+    addDish(data() as Dish);
   };
 
   const [dishNameEmpty, setDishNameEmpty] = createSignal(false);
-  const [dishCategoryEmpty, setDishCategoryEmpty] = createSignal(false);
   const [dishNameForbiddenSymbols, setDishNameForbiddenSymbols] =
     createSignal(false);
-  const [dishCategoryForbiddenSymbols, setDishCategoryForbiddenSymbols] =
-    createSignal(false);
   const [dishDescriptionForbiddenSymbols, setDishDescriptionForbiddenSymbols] =
+    createSignal(false);
+  // Dish category can't be empty or with forbidden symbols, but just in case:
+  const [dishCategoryEmpty, setDishCategoryEmpty] = createSignal(false);
+  const [dishCategoryForbiddenSymbols, setDishCategoryForbiddenSymbols] =
     createSignal(false);
 
   createEffect(
@@ -105,24 +127,21 @@ const AddDishForm = (props: { defaultCategory?: string }): JSX.Element => {
   );
 
   const dishNameEmptyMessage = 'Название блюда не может быть пустым';
-  const dishCategoryEmptyMessage = 'Категория блюда не может быть пустой';
   const dishNameForbiddenSymbolsMessage =
     'В названии блюда используются запрещённые символы';
-  const dishCategoryForbiddenSymbolsMessage =
-    'В категории блюда используются запрещённые символы';
   const dishDescriptionForbiddenSymbolsMessage =
     'В описании блюда используются запрещённые символы';
+  // Just in case:
+  const dishCategoryEmptyMessage = 'Категория блюда не может быть пустой';
+  const dishCategoryForbiddenSymbolsMessage =
+    'В категории блюда используются запрещённые символы';
 
   return (
     <Form onsubmit={handleSubmit}>
       <FormIncorrectInputMessage>
         {dishNameEmpty() && <span>{dishNameEmptyMessage}</span>}
-        {dishCategoryEmpty() && <span>{dishCategoryEmptyMessage}</span>}
         {dishNameForbiddenSymbols() && (
           <span>{dishNameForbiddenSymbolsMessage}</span>
-        )}
-        {dishCategoryForbiddenSymbols() && (
-          <span>{dishCategoryForbiddenSymbolsMessage}</span>
         )}
         {dishDescriptionForbiddenSymbols() && (
           <span>{dishDescriptionForbiddenSymbolsMessage}</span>

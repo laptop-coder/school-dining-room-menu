@@ -8,12 +8,22 @@ import FormIncorrectInputMessage from '../ui/FormIncorrectInputMessage/FormIncor
 
 const AddCategoryForm = (): JSX.Element => {
   const [categoryName, setCategoryName] = createSignal('');
+
   const handleSubmit = (event: SubmitEvent) => {
     event.preventDefault();
-    if (categoryName() !== '') {
-      addCategory({ categoryName: categoryName() });
+
+    // Checks
+    if (categoryNameEmpty()) {
+      alert(categoryNameEmptyMessage);
+      return;
+    } else if (categoryNameForbiddenSymbols()) {
+      alert(categoryNameForbiddenSymbolsMessage);
+      return;
     }
+
+    addCategory({ categoryName: categoryName() });
   };
+
   const [categoryNameEmpty, setCategoryNameEmpty] = createSignal(false);
   const [categoryNameForbiddenSymbols, setCategoryNameForbiddenSymbols] =
     createSignal(false);
