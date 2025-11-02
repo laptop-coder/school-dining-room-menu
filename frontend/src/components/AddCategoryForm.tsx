@@ -1,4 +1,4 @@
-import { JSX, createSignal, createEffect } from 'solid-js';
+import { JSX, createSignal, createEffect, on } from 'solid-js';
 import Input from '../ui/Input/Input';
 import SubmitButton from '../ui/SubmitButton/SubmitButton';
 import Form from '../ui/Form/Form';
@@ -18,19 +18,26 @@ const AddCategoryForm = (): JSX.Element => {
   const [categoryNameForbiddenSymbols, setCategoryNameForbiddenSymbols] =
     createSignal(false);
 
-  createEffect(() => {
-    // Checks for category name
-    if (categoryName() === '') {
-      setCategoryNameEmpty(true);
-    } else {
-      setCategoryNameEmpty(false);
-    }
-    if (!checkStringSecurity(categoryName())) {
-      setCategoryNameForbiddenSymbols(true);
-    } else {
-      setCategoryNameForbiddenSymbols(false);
-    }
-  });
+  createEffect(
+    on(
+      () => categoryName(),
+      () => {
+        // Checks for category name
+        if (categoryName() === '') {
+          setCategoryNameEmpty(true);
+          setCategoryNameForbiddenSymbols(false);
+        } else {
+          setCategoryNameEmpty(false);
+          if (!checkStringSecurity(categoryName())) {
+            setCategoryNameForbiddenSymbols(true);
+          } else {
+            setCategoryNameForbiddenSymbols(false);
+          }
+        }
+      },
+      { defer: true },
+    ),
+  );
 
   return (
     <Form onsubmit={handleSubmit}>
