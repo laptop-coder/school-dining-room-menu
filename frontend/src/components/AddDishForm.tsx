@@ -59,7 +59,7 @@ const AddDishForm = (props: { defaultCategory?: string }): JSX.Element => {
     createSignal(false);
   const [dishCategoryForbiddenSymbols, setDishCategoryForbiddenSymbols] =
     createSignal(false);
-  const [dishDescryptionForbiddenSymbols, setDishDescriptionForbiddenSymbols] =
+  const [dishDescriptionForbiddenSymbols, setDishDescriptionForbiddenSymbols] =
     createSignal(false);
 
   createEffect(
@@ -117,7 +117,7 @@ const AddDishForm = (props: { defaultCategory?: string }): JSX.Element => {
         {dishCategoryForbiddenSymbols() && (
           <span>В категории блюда используются запрещённые символы</span>
         )}
-        {dishDescryptionForbiddenSymbols() && (
+        {dishDescriptionForbiddenSymbols() && (
           <span>В описании блюда используются запрещённые символы</span>
         )}
       </FormIncorrectInputMessage>
@@ -126,6 +126,7 @@ const AddDishForm = (props: { defaultCategory?: string }): JSX.Element => {
         name='dish_name'
         value={dishName()}
         oninput={(event) => setDishName(event.target.value)}
+        redBorder={dishNameEmpty() || dishNameForbiddenSymbols()}
       />
       {/*TODO: is it normal to use Loading in the fallback here?*/}
       <Switch fallback={<Loading />}>
@@ -173,6 +174,7 @@ const AddDishForm = (props: { defaultCategory?: string }): JSX.Element => {
         name='dish_description'
         value={dishDescription()}
         oninput={(event) => setDishDescription(event.target.value)}
+        redBorder={dishDescriptionForbiddenSymbols()}
       />
       <AttachFile
         accept='image/jpeg,image/png'

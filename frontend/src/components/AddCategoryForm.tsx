@@ -56,6 +56,7 @@ const AddCategoryForm = (): JSX.Element => {
         name='category_name'
         value={categoryName()}
         oninput={(event) => setCategoryName(event.target.value)}
+        redBorder={categoryNameEmpty() || categoryNameForbiddenSymbols()}
       />
       <SubmitButton name='add_category_submit'>Добавить категорию</SubmitButton>
     </Form>
