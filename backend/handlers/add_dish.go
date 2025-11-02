@@ -4,7 +4,6 @@ import (
 	. "backend/database"
 	. "backend/logger"
 	. "backend/utils"
-	"fmt"
 	"github.com/google/uuid"
 	"net/http"
 )
@@ -78,20 +77,13 @@ func AddDish(w http.ResponseWriter, r *http.Request) {
 	}
 
 	dishId := uuid.New().String()
-	sqlQuery := fmt.Sprintf(`
-	INSERT INTO dish (
-		dish_id,
-		dish_category,
-		dish_name,
-		dish_description
-	) VALUES (
-		'%s',
-		'%s',
-		'%s',
-		'%s'
-	);
-	`, dishId, dishCategory, dishName, dishDescription)
-	if _, err := DB.Exec(sqlQuery); err != nil {
+	if _, err := DB.Exec(
+		"INSERT INTO dish (dish_id, dish_category, dish_name, dish_description) VALUES (?, ?, ?, ?);",
+		dishId,
+		dishCategory,
+		dishName,
+		dishDescription,
+	); err != nil {
 		msg := "Error adding new dish: " + err.Error()
 		Logger.Error(msg)
 		http.Error(w, msg, http.StatusInternalServerError)

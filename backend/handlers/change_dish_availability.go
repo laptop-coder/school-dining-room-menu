@@ -4,7 +4,6 @@ import (
 	. "backend/database"
 	. "backend/logger"
 	. "backend/utils"
-	"fmt"
 	"net/http"
 )
 
@@ -36,10 +35,12 @@ func ChangeDishAvailability(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, msg, http.StatusBadRequest)
 		return
 	}
-	sqlQuery := fmt.Sprintf(`
-	UPDATE dish SET dish_available='%s' WHERE dish_id='%s';
-	`, newAvailabilityValue, dishId)
-	if _, err := DB.Exec(sqlQuery); err != nil {
+
+	if _, err := DB.Exec(
+		"UPDATE dish SET dish_available=? WHERE dish_id=?;",
+		newAvailabilityValue,
+		dishId,
+	); err != nil {
 		msg := "Error changing dish availability: " + err.Error()
 		Logger.Error(msg)
 		http.Error(w, msg, http.StatusInternalServerError)

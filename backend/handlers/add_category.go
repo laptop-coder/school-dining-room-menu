@@ -4,7 +4,6 @@ import (
 	. "backend/database"
 	. "backend/logger"
 	. "backend/utils"
-	"fmt"
 	"net/http"
 )
 
@@ -45,14 +44,7 @@ func AddCategory(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	sqlQuery := fmt.Sprintf(`
-	INSERT INTO category (
-		category_name
-	) VALUES (
-		'%s'
-	);
-	`, categoryName)
-	if _, err := DB.Exec(sqlQuery); err != nil {
+	if _, err := DB.Exec("INSERT INTO category (category_name) VALUES (?);", categoryName); err != nil {
 		msg := "Error adding new category: " + err.Error()
 		Logger.Error(msg)
 		http.Error(w, msg, http.StatusInternalServerError)

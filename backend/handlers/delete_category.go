@@ -4,7 +4,6 @@ import (
 	. "backend/database"
 	. "backend/logger"
 	. "backend/utils"
-	"fmt"
 	"net/http"
 )
 
@@ -29,10 +28,10 @@ func DeleteCategory(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, msg, http.StatusBadRequest)
 		return
 	}
-	sqlQuery := fmt.Sprintf(`
-	DELETE FROM category WHERE category_name='%s';
-	`, categoryName)
-	if _, err := DB.Exec(sqlQuery); err != nil {
+	if _, err := DB.Exec(
+		"DELETE FROM category WHERE category_name=?;",
+		categoryName,
+	); err != nil {
 		msg := "Error deleting category: " + err.Error()
 		Logger.Error(msg)
 		http.Error(w, msg, http.StatusInternalServerError)

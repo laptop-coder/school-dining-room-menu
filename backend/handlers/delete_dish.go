@@ -30,10 +30,7 @@ func DeleteDish(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, msg, http.StatusBadRequest)
 		return
 	}
-	sqlQuery := fmt.Sprintf(`
-	DELETE FROM dish WHERE dish_id='%s';
-	`, dishId)
-	if _, err := DB.Exec(sqlQuery); err != nil {
+	if _, err := DB.Exec("DELETE FROM dish WHERE dish_id=?;", dishId); err != nil {
 		msg := "Error deleting dish: " + err.Error()
 		Logger.Error(msg)
 		http.Error(w, msg, http.StatusInternalServerError)

@@ -5,7 +5,6 @@ import (
 	. "backend/database"
 	. "backend/logger"
 	. "backend/utils"
-	"fmt"
 	"golang.org/x/crypto/bcrypt"
 	"io"
 	"net/http"
@@ -53,12 +52,11 @@ func AdminRegister(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	sqlQuery := fmt.Sprintf(
-		"INSERT INTO admin (username, password) VALUES ('%s', '%s');",
+	if _, err := DB.Exec(
+		"INSERT INTO admin (username, password) VALUES (?, ?);",
 		username,
 		passwordHash,
-	)
-	if _, err := DB.Exec(sqlQuery); err != nil {
+	); err != nil {
 		msg := "Error registering new admin account: " + err.Error()
 		Logger.Error(msg)
 		http.Error(w, msg, http.StatusInternalServerError)

@@ -5,7 +5,6 @@ import (
 	. "backend/logger"
 	"crypto/rsa"
 	"errors"
-	"fmt"
 	"github.com/golang-jwt/jwt/v5"
 	"net/http"
 	"time"
@@ -61,8 +60,7 @@ func VerifyJWTAccess(accessToken *string, publicKey *rsa.PublicKey) (*string, er
 
 func checkAdminAccountExistence(username *string) (*bool, error) {
 	exists := false
-	sqlQuery := fmt.Sprintf("SELECT COUNT(*) FROM admin WHERE username='%s';", *username)
-	row := DB.QueryRow(sqlQuery)
+	row := DB.QueryRow("SELECT COUNT(*) FROM admin WHERE username=?;", *username)
 	var count int
 	if err := row.Scan(&count); err != nil {
 		return &exists, err

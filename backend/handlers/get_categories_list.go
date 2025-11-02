@@ -19,9 +19,7 @@ func GetCategoriesList(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	// Get data from the database
-
-	sqlQuery := "SELECT * FROM category ORDER BY category_name;"
-	if rows, err := DB.Query(sqlQuery); err != nil {
+	if rows, err := DB.Query("SELECT * FROM category ORDER BY category_name;"); err != nil {
 		msg := "Error getting categories list from the database: " + err.Error()
 		Logger.Error(msg)
 		http.Error(w, msg, http.StatusInternalServerError)

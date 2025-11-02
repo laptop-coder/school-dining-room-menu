@@ -8,7 +8,6 @@ import (
 	. "backend/utils"
 	"database/sql"
 	"encoding/json"
-	"fmt"
 	"golang.org/x/crypto/bcrypt"
 	"net/http"
 	"time"
@@ -48,11 +47,10 @@ func AdminLogin(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	sqlQuery := fmt.Sprintf(
-		"SELECT * FROM admin WHERE username='%s';",
+	row := DB.QueryRow(
+		"SELECT * FROM admin WHERE username=?;",
 		username,
 	)
-	row := DB.QueryRow(sqlQuery)
 	var adminAccountData types.AdminAccountAuthorizationData
 	err := row.Scan(
 		&adminAccountData.Username,
