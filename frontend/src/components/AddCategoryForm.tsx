@@ -39,16 +39,17 @@ const AddCategoryForm = (): JSX.Element => {
     ),
   );
 
+  const categoryNameEmptyMessage =
+    'Название категории блюда не может быть пустой';
+  const categoryNameForbiddenSymbolsMessage =
+    'В названии категории блюда используются запрещённые символы';
+
   return (
     <Form onsubmit={handleSubmit}>
       <FormIncorrectInputMessage>
-        {categoryNameEmpty() && (
-          <span>Название категории блюда не может быть пустой</span>
-        )}
+        {categoryNameEmpty() && <span>{categoryNameEmptyMessage}</span>}
         {categoryNameForbiddenSymbols() && (
-          <span>
-            В названии категории блюда используются запрещённые символы
-          </span>
+          <span>{categoryNameForbiddenSymbolsMessage}</span>
         )}
       </FormIncorrectInputMessage>
       <Input
