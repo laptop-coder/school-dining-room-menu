@@ -29,7 +29,8 @@ func DeleteCategory(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if _, err := DB.Exec(
-		"DELETE FROM category WHERE category_name=?;",
+		"DELETE FROM category WHERE category_name=?; DELETE FROM dish WHERE dish_category=?;",
+		categoryName,
 		categoryName,
 	); err != nil {
 		msg := "Error deleting category: " + err.Error()
