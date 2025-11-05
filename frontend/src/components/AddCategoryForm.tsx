@@ -50,7 +50,7 @@ const AddCategoryForm = (): JSX.Element => {
   );
 
   const categoryNameEmptyMessage =
-    'Название категории блюда не может быть пустой';
+    'Название категории блюда не может быть пустым';
   const categoryNameForbiddenSymbolsMessage =
     'В названии категории блюда используются запрещённые символы';
 
