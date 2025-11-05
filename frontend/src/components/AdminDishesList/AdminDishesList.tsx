@@ -66,7 +66,9 @@ const AdminDishesList = (props: {
                 {...item}
                 onclick={() => {
                   if (
-                    confirm(`Подтвердите удаление блюда "${item.DishName}"`)
+                    confirm(
+                      `Подтвердите удаление блюда "${item.DishName}". Это действие необратимо`,
+                    )
                   ) {
                     deleteDish({
                       dishId: item.DishId,

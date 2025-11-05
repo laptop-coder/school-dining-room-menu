@@ -11,7 +11,11 @@ const AdminCategoriesListItem = (props: {
     <div
       class={styles.admin_categories_list_item}
       onclick={() => {
-        if (confirm(`Подтвердите удаление категории "${props.categoryName}"`)) {
+        if (
+          confirm(
+            `Подтвердите удаление категории "${props.categoryName}". Все блюда в этой категории будут удалены. Это действие необратимо`,
+          )
+        ) {
           deleteCategory({
             categoryName: props.categoryName,
             reloadCategoriesList: props.reloadCategoriesList,
