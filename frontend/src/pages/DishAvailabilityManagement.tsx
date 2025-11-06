@@ -18,7 +18,10 @@ const DishAvailabilityManagementPage = (): JSX.Element => {
       admin
       authorized={authorized()}
     >
-      <Header admin />
+      <Header
+        admin
+        authorized={authorized()}
+      />
       <Content>
         <CategoryToggle
           setter={setCategory}

@@ -15,7 +15,10 @@ const CategoryManagementPage = (): JSX.Element => {
       admin
       authorized={authorized()}
     >
-      <Header admin />
+      <Header
+        admin
+        authorized={authorized()}
+      />
       <Content>
         <AdminCategoriesList />
       </Content>

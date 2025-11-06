@@ -12,7 +12,7 @@ const Footer = (): JSX.Element => {
         href={TECH_SUPPORT_URL}
         class={styles.link}
       >
-      Техническая поддержка
+        Техническая поддержка
       </A>
       <A
         href={SCHOOL_URL}
