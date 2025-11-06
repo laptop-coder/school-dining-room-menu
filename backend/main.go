@@ -21,6 +21,7 @@ func main() {
 	mux.Handle("/dishes/get_list", http.HandlerFunc(handlers.GetDishesList))
 	mux.Handle("/admin/register", http.HandlerFunc(handlers.AdminRegister))
 	mux.Handle("/admin/login", http.HandlerFunc(handlers.AdminLogin))
+	mux.Handle("/admin/logout", http.HandlerFunc(handlers.AdminLogout))
 
 	// For admin
 	mux.Handle("/category/add", utils.AuthMiddleware(http.HandlerFunc(handlers.AddCategory)))
