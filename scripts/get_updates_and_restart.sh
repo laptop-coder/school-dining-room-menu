@@ -1,16 +1,17 @@
 #!/bin/sh
 
+BACKEND_OLD_IMAGE_ID="$(docker inspect laptopcoder/school-dining-room-menu-backend --format {{.Id}})"
+FRONTEND_OLD_IMAGE_ID="$(docker inspect laptopcoder/school-dining-room-menu-frontend --format {{.Id}})"
+
 docker-compose -f "${HOME}/school-dining-room-menu/compose.yaml" down
 
-
-BACKEND_OLD_IMAGE_ID="$(docker inspect laptopcoder/school-dining-room-menu-backend --format {{.Id}})"
 docker rmi laptopcoder/school-dining-room-menu-backend:latest > /dev/null
-docker pull laptopcoder/school-dining-room-menu-backend:latest > /dev/null
-BACKEND_NEW_IMAGE_ID="$(docker inspect laptopcoder/school-dining-room-menu-backend --format {{.Id}})"
-
-FRONTEND_OLD_IMAGE_ID="$(docker inspect laptopcoder/school-dining-room-menu-frontend --format {{.Id}})"
 docker rmi laptopcoder/school-dining-room-menu-frontend:latest  > /dev/null
+
+docker pull laptopcoder/school-dining-room-menu-backend:latest > /dev/null
 docker pull laptopcoder/school-dining-room-menu-frontend:latest  > /dev/null
+
+BACKEND_NEW_IMAGE_ID="$(docker inspect laptopcoder/school-dining-room-menu-backend --format {{.Id}})"
 FRONTEND_NEW_IMAGE_ID="$(docker inspect laptopcoder/school-dining-room-menu-frontend --format {{.Id}})"
 
 
