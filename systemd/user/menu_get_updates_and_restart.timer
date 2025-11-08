@@ -9,3 +9,5 @@ OnCalendar=*-*-* 02:00:00
 AccuracySec=10minutes
 Persistent=false
 
+[Install]
+WantedBy=multi-user.target
