@@ -1,4 +1,8 @@
 #!/bin/sh
+
+docker-compose -f "${HOME}/school-dining-room-menu/compose.yaml" down
+
+
 BACKEND_OLD_IMAGE_ID="$(docker inspect laptopcoder/school-dining-room-menu-backend --format {{.Id}})"
 docker rmi laptopcoder/school-dining-room-menu-backend:latest > /dev/null
 docker pull laptopcoder/school-dining-room-menu-backend:latest > /dev/null
@@ -23,3 +27,6 @@ if [ "$FRONTEND_OLD_IMAGE_ID" != "$FRONTEND_NEW_IMAGE_ID" ]; then
 else
     echo "The frontend image on the Docker Hub was not updated."
 fi;
+
+
+docker-compose -f "${HOME}/school-dining-room-menu/compose.yaml" up -d
