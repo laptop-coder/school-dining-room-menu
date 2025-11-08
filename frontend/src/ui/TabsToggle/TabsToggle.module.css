@@ -15,7 +15,6 @@
   cursor: pointer;
   display: flex;
   align-items: center;
-  -webkit-tap-highlight-color: transparent; /*Remove blue highlight when tap on phone*/
 }
 
 .tab_text {
