@@ -1,7 +1,6 @@
 .admin_unauthorized {
   color: var(--white);
   margin: auto 20px;
-  width: 100%;
   text-align: center;
 }
 
