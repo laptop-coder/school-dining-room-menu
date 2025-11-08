@@ -1,16 +1,25 @@
 #!/bin/sh
 BACKEND_OLD_IMAGE_ID="$(docker inspect laptopcoder/school-dining-room-menu-backend --format {{.Id}})"
-FRONTEND_OLD_IMAGE_ID="$(docker inspect laptopcoder/school-dining-room-menu-frontend --format {{.Id}})"
+docker rmi laptopcoder/school-dining-room-menu-backend:latest > /dev/null
 docker pull laptopcoder/school-dining-room-menu-backend:latest > /dev/null
-docker pull laptopcoder/school-dining-room-menu-frontend:latest  > /dev/null
 BACKEND_NEW_IMAGE_ID="$(docker inspect laptopcoder/school-dining-room-menu-backend --format {{.Id}})"
+
+FRONTEND_OLD_IMAGE_ID="$(docker inspect laptopcoder/school-dining-room-menu-frontend --format {{.Id}})"
+docker rmi laptopcoder/school-dining-room-menu-frontend:latest  > /dev/null
+docker pull laptopcoder/school-dining-room-menu-frontend:latest  > /dev/null
 FRONTEND_NEW_IMAGE_ID="$(docker inspect laptopcoder/school-dining-room-menu-frontend --format {{.Id}})"
 
 
-if [ "$BACKEND_OLD_IMAGE_ID" != "$BACKEND_NEW_IMAGE_ID" ] || [ "$FRONTEND_OLD_IMAGE_ID" != "$FRONTEND_NEW_IMAGE_ID" ]; then
-    echo "The image(s) on the Docker Hub was(were) updated, restarting the project..."
+if [ "$BACKEND_OLD_IMAGE_ID" != "$BACKEND_NEW_IMAGE_ID" ]; then
+    echo "The backend image on the Docker Hub was updated, restarting container..."
     docker restart menu-backend
+else
+    echo "The backend image on the Docker Hub was not updated."
+fi;
+
+if [ "$FRONTEND_OLD_IMAGE_ID" != "$FRONTEND_NEW_IMAGE_ID" ]; then
+    echo "The frontend image on the Docker Hub was updated, restarting container..."
     docker restart menu-frontend
 else
-    echo "The images on the Docker Hub were not updated."
+    echo "The frontend image on the Docker Hub was not updated."
 fi;
