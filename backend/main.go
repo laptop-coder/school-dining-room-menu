@@ -27,8 +27,9 @@ func main() {
 	mux.Handle("/category/add", utils.AuthMiddleware(http.HandlerFunc(handlers.AddCategory)))
 	mux.Handle("/category/delete", utils.AuthMiddleware(http.HandlerFunc(handlers.DeleteCategory)))
 	mux.Handle("/dish/add", utils.AuthMiddleware(http.HandlerFunc(handlers.AddDish)))
-	mux.Handle("/dish/change_availability", utils.AuthMiddleware(http.HandlerFunc(handlers.ChangeDishAvailability)))
+	mux.Handle("/dish/edit", utils.AuthMiddleware(http.HandlerFunc(handlers.EditDish)))
 	mux.Handle("/dish/delete", utils.AuthMiddleware(http.HandlerFunc(handlers.DeleteDish)))
+	mux.Handle("/dish/change_availability", utils.AuthMiddleware(http.HandlerFunc(handlers.ChangeDishAvailability)))
 
 	Logger.Info("Starting server via HTTP...")
 	err := http.ListenAndServe(":"+Cfg.App.PortBackend, mux)
