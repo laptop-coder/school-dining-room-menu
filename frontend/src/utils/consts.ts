@@ -18,3 +18,8 @@ export const STORAGE_ROUTE = '/storage/storage';
 export const BACKEND_URL = 'http://10.0.6.100:14536';
 export const SCHOOL_URL = 'https://лицей369.рф';
 export const TECH_SUPPORT_URL = 'https://help.licey369.ru';
+
+export const PASSWORD_MIN_LEN = '8';
+export const PASSWORD_MAX_LEN = '32';
+export const USERNAME_MIN_LEN = '1';
+export const USERNAME_MAX_LEN = '16';

@@ -12,8 +12,3 @@
 .input::placeholder {
   color: var(--gray-2);
 }
-
-.input_red_border {
-  border: 1px solid #f00;
-  outline: 1px solid #f00;
-}

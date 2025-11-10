@@ -16,6 +16,7 @@ const Select = (
       class={styles.select}
       id={props.id}
       oninput={props.oninput}
+      required={props.required}
     >
       {props.children}
     </select>

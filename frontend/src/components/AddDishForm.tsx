@@ -5,8 +5,6 @@ import {
   JSX,
   createSignal,
   createResource,
-  createEffect,
-  on,
 } from 'solid-js';
 import DishPhoto from '../ui/DishPhoto/DishPhoto';
 import Input from '../ui/Input/Input';
@@ -23,8 +21,7 @@ import Error from '../ui/Error/Error';
 import NoData from '../ui/NoData/NoData';
 import type { ResourceReturn } from 'solid-js';
 import fileToBase64 from '../utils/fileToBase64';
-import checkStringSecurity from '../utils/checkStringSecurity';
-import FormIncorrectInputMessage from '../ui/FormIncorrectInputMessage/FormIncorrectInputMessage';
+import { allSymbolsRegExpStr, allSymbolsRegExp } from '../utils/regExps';
 
 const AddDishForm = (props: { defaultCategory?: string }): JSX.Element => {
   const [categoriesList]: ResourceReturn<string[]> =
@@ -40,31 +37,9 @@ const AddDishForm = (props: { defaultCategory?: string }): JSX.Element => {
 
   const handleSubmit = (event: SubmitEvent) => {
     event.preventDefault();
-
     if (dishCategory() === '') {
       setDishCategory((categoriesList() as string[])[0]);
     }
-
-    // Checks
-    if (dishNameEmpty()) {
-      alert(dishNameEmptyMessage);
-      return;
-    } else if (dishCategoryEmpty()) {
-      // just in case
-      alert(dishCategoryEmptyMessage);
-      return;
-    } else if (dishNameForbiddenSymbols()) {
-      alert(dishNameForbiddenSymbolsMessage);
-      return;
-    } else if (dishCategoryForbiddenSymbols()) {
-      // just in case
-      alert(dishCategoryForbiddenSymbolsMessage);
-      return;
-    } else if (dishDescriptionForbiddenSymbols()) {
-      alert(dishDescriptionForbiddenSymbolsMessage);
-      return;
-    }
-
     setData({
       DishCategory: dishCategory(),
       DishName: dishName(),
@@ -74,85 +49,15 @@ const AddDishForm = (props: { defaultCategory?: string }): JSX.Element => {
     addDish(data() as Dish);
   };
 
-  const [dishNameEmpty, setDishNameEmpty] = createSignal(false);
-  const [dishNameForbiddenSymbols, setDishNameForbiddenSymbols] =
-    createSignal(false);
-  const [dishDescriptionForbiddenSymbols, setDishDescriptionForbiddenSymbols] =
-    createSignal(false);
-  // Dish category can't be empty or with forbidden symbols, but just in case:
-  const [dishCategoryEmpty, setDishCategoryEmpty] = createSignal(false);
-  const [dishCategoryForbiddenSymbols, setDishCategoryForbiddenSymbols] =
-    createSignal(false);
-
-  createEffect(
-    on(
-      [() => dishName(), () => dishCategory(), () => dishDescription()],
-      () => {
-        // Checks for dish name
-        if (dishName() === '') {
-          setDishNameEmpty(true);
-          setDishNameForbiddenSymbols(false);
-        } else {
-          setDishNameEmpty(false);
-          if (!checkStringSecurity(dishName())) {
-            setDishNameForbiddenSymbols(true);
-          } else {
-            setDishNameForbiddenSymbols(false);
-          }
-        }
-        // Checks for dish category (just in case)
-        if (dishCategory() === '') {
-          setDishCategoryEmpty(true);
-          setDishCategoryForbiddenSymbols(false);
-        } else {
-          setDishCategoryEmpty(false);
-          if (!checkStringSecurity(dishCategory())) {
-            setDishCategoryForbiddenSymbols(true);
-          } else {
-            setDishCategoryForbiddenSymbols(false);
-          }
-        }
-        // Checks for dish description
-        if (
-          dishDescription() !== '' &&
-          !checkStringSecurity(dishDescription())
-        ) {
-          setDishDescriptionForbiddenSymbols(true);
-        } else {
-          setDishDescriptionForbiddenSymbols(false);
-        }
-      },
-      { defer: true },
-    ),
-  );
-
-  const dishNameEmptyMessage = 'Название блюда не может быть пустым';
-  const dishNameForbiddenSymbolsMessage =
-    'В названии блюда используются запрещённые символы';
-  const dishDescriptionForbiddenSymbolsMessage =
-    'В описании блюда используются запрещённые символы';
-  // Just in case:
-  const dishCategoryEmptyMessage = 'Категория блюда не может быть пустой';
-  const dishCategoryForbiddenSymbolsMessage =
-    'В категории блюда используются запрещённые символы';
-
   return (
     <Form onsubmit={handleSubmit}>
-      <FormIncorrectInputMessage>
-        {dishNameEmpty() && <span>{dishNameEmptyMessage}</span>}
-        {dishNameForbiddenSymbols() && (
-          <span>{dishNameForbiddenSymbolsMessage}</span>
-        )}
-        {dishDescriptionForbiddenSymbols() && (
-          <span>{dishDescriptionForbiddenSymbolsMessage}</span>
-        )}
-      </FormIncorrectInputMessage>
       <Input
         placeholder='Название блюда*'
         name='dish_name'
         value={dishName()}
         oninput={(event) => setDishName(event.target.value)}
-        redBorder={dishNameEmpty() || dishNameForbiddenSymbols()}
+        required
+        pattern={allSymbolsRegExpStr}
       />
       {/*TODO: is it normal to use Loading in the fallback here?*/}
       <Switch fallback={<Loading />}>
@@ -175,6 +80,7 @@ const AddDishForm = (props: { defaultCategory?: string }): JSX.Element => {
             value={dishCategory()}
             oninput={(event) => setDishCategory(event.target.value)}
             label='Выберите категорию*'
+            required
           >
             <For
               each={categoriesList()}
@@ -199,8 +105,19 @@ const AddDishForm = (props: { defaultCategory?: string }): JSX.Element => {
         placeholder='Описание блюда'
         name='dish_description'
         value={dishDescription()}
-        oninput={(event) => setDishDescription(event.target.value)}
-        redBorder={dishDescriptionForbiddenSymbols()}
+        oninput={(event) => {
+          setDishDescription(event.target.value);
+          if (
+            dishDescription() != '' &&
+            !allSymbolsRegExp.test(dishDescription())
+          ) {
+            event.target.setCustomValidity(
+              'Введите данные в указанном формате.',
+            );
+          } else {
+            event.target.setCustomValidity('');
+          }
+        }}
       />
       <AttachFile
         accept='image/jpeg,image/png'

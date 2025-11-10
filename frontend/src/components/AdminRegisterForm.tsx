@@ -8,10 +8,15 @@ import Input from '../ui/Input/Input';
 import {
   ADMIN_LOGIN_ROUTE,
   BACKEND_ADMIN_REGISTER_ROUTE,
+  PASSWORD_MIN_LEN,
+  PASSWORD_MAX_LEN,
+  USERNAME_MIN_LEN,
+  USERNAME_MAX_LEN,
 } from '../utils/consts';
 import AdminAuthFormOtherChoice from '../ui/AdminAuthFormOtherChoice/AdminAuthFormOtherChoice';
 import AdminAuthFormTitle from '../ui/AdminAuthFormTitle/AdminAuthFormTitle';
 import axiosInstance from '../utils/axiosInstance';
+import { usernameRegExpStr, passwordRegExpStr } from '../utils/regExps';
 
 const AdminRegisterForm = (): JSX.Element => {
   const [username, setUsername] = createSignal('');
@@ -20,37 +25,33 @@ const AdminRegisterForm = (): JSX.Element => {
 
   const handleSubmit = async (event: SubmitEvent) => {
     event.preventDefault();
-    if (username() != '' && password() != '' && passwordRepeat() != '') {
-      if (password() == passwordRepeat()) {
-        await axiosInstance
-          .post(
-            BACKEND_ADMIN_REGISTER_ROUTE,
-            {
-              username: username(),
-              password: password(),
+    if (password() == passwordRepeat()) {
+      await axiosInstance
+        .post(
+          BACKEND_ADMIN_REGISTER_ROUTE,
+          {
+            username: username(),
+            password: password(),
+          },
+          {
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
             },
-            {
-              headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-              },
-            },
-          )
-          .then((response) => {
-            if (response.status == 200) {
-              window.location.replace(ADMIN_LOGIN_ROUTE);
-            }
-          })
-          .catch((error) => {
-            alert(
-              'Ошибка отправки. Возможно, аккаунт администратора уже создан. Если Вы уверены, что создаёте первый аккаунт, попробуйте ещё раз',
-            );
-            console.log(error);
-          });
-      } else {
-        alert('Пароли не совпадают');
-      }
+          },
+        )
+        .then((response) => {
+          if (response.status == 200) {
+            window.location.replace(ADMIN_LOGIN_ROUTE);
+          }
+        })
+        .catch((error) => {
+          alert(
+            'Ошибка отправки. Возможно, аккаунт администратора уже создан. Если Вы уверены, что создаёте первый аккаунт, попробуйте ещё раз',
+          );
+          console.log(error);
+        });
     } else {
-      alert('Не все поля заполнены');
+      alert('Пароли не совпадают');
     }
   };
 
@@ -62,6 +63,10 @@ const AdminRegisterForm = (): JSX.Element => {
         name='admin_register_form_username'
         value={username()}
         oninput={(event) => setUsername(event.target.value)}
+        required
+        pattern={usernameRegExpStr}
+        minlength={USERNAME_MIN_LEN}
+        maxlength={USERNAME_MAX_LEN}
       />
       <Input
         type='password'
@@ -69,6 +74,10 @@ const AdminRegisterForm = (): JSX.Element => {
         name='admin_register_form_password'
         value={password()}
         oninput={(event) => setPassword(event.target.value)}
+        required
+        pattern={passwordRegExpStr}
+        minlength={PASSWORD_MIN_LEN}
+        maxlength={PASSWORD_MAX_LEN}
       />
       <Input
         type='password'
@@ -76,6 +85,10 @@ const AdminRegisterForm = (): JSX.Element => {
         name='admin_register_form_password_repeat'
         value={passwordRepeat()}
         oninput={(event) => setPasswordRepeat(event.target.value)}
+        required
+        pattern={passwordRegExpStr}
+        minlength={PASSWORD_MIN_LEN}
+        maxlength={PASSWORD_MAX_LEN}
       />
       <AdminAuthFormSubmitButton title='Зарегистрироваться' />
       <AdminAuthFormOtherChoice>

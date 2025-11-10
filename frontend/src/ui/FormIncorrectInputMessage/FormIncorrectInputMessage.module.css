@@ -1,8 +1,0 @@
-.form_incorrect_input_message {
-  display: flex;
-  flex-direction: column;
-  color: #f00;
-  width: 100%;
-  height: 38px; /*for two messages*/
-  justify-content: flex-end;
-}
