@@ -1,0 +1,2 @@
+# Get updates and restart the project at 05:00
+0 5 * * * /usr/bin/sh "${HOME}/school-dining-room-menu/scripts/get_updates_and_restart.sh"

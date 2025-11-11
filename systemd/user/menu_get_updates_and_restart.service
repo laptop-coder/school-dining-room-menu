@@ -1,9 +1,0 @@
-[Unit]
-Description=Get updates from the Docker Hub and restart the menu project
-Wants=menu_get_updates_and_restart.timer
-
-[Service]
-Type=oneshot
-Environment=HOME=%h
-ExecStart=/usr/bin/sh "${HOME}/school-dining-room-menu/scripts/get_updates_and_restart.sh"
-
