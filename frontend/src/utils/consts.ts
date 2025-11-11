@@ -8,6 +8,7 @@ export const DISH_AVAILABILITY_MANAGEMENT_ROUTE =
   ADMIN_ROUTE + '/dish_availability_management';
 export const ADD_CATEGORY_ROUTE = ADMIN_ROUTE + '/add_category';
 export const ADD_DISH_ROUTE = ADMIN_ROUTE + '/add_dish';
+export const EDIT_DISH_ROUTE = ADMIN_ROUTE + '/edit_dish';
 
 export const BACKEND_ADMIN_LOGIN_ROUTE = '/admin/login';
 export const BACKEND_ADMIN_REGISTER_ROUTE = '/admin/register';
