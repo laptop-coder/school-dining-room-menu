@@ -30,6 +30,7 @@ func main() {
 	mux.Handle("/dish/edit", utils.AuthMiddleware(http.HandlerFunc(handlers.EditDish)))
 	mux.Handle("/dish/delete", utils.AuthMiddleware(http.HandlerFunc(handlers.DeleteDish)))
 	mux.Handle("/dish/change_availability", utils.AuthMiddleware(http.HandlerFunc(handlers.ChangeDishAvailability)))
+	mux.Handle("/dish/get_data", utils.AuthMiddleware(http.HandlerFunc(handlers.GetDishData)))
 
 	Logger.Info("Starting server via HTTP...")
 	err := http.ListenAndServe(":"+Cfg.App.PortBackend, mux)
