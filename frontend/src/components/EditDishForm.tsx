@@ -174,7 +174,9 @@ const EditDishForm = (props: { dishId: string }): JSX.Element => {
               />
             )
           )}
-          <SubmitButton name='edit_dish_submit'>Обновить блюдо</SubmitButton>
+          <SubmitButton name='edit_dish_submit'>
+            Сохранить изменения
+          </SubmitButton>
         </Form>
       </Match>
       <Match when={oldDishData.state === 'errored'}>
