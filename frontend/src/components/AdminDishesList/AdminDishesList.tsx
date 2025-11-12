@@ -11,7 +11,6 @@ import type { ResourceReturn, Accessor } from 'solid-js';
 
 import styles from './AdminDishesList.module.css';
 import fetchDishesList from '../../utils/fetchDishesList';
-import deleteDish from '../../utils/deleteDish';
 import Loading from '../../ui/Loading/Loading';
 import Error from '../../ui/Error/Error';
 import NoData from '../../ui/NoData/NoData';
@@ -65,18 +64,7 @@ const AdminDishesList = (props: {
               <DishContainer
                 admin
                 {...item}
-                onclick={() => {
-                  if (
-                    confirm(
-                      `Подтвердите удаление блюда "${item.DishName}". Это действие необратимо`,
-                    )
-                  ) {
-                    deleteDish({
-                      dishId: item.DishId,
-                      reloadDishesList: reloadDishesList,
-                    });
-                  }
-                }}
+                reloadDishesList={reloadDishesList}
               />
             )}
           </For>

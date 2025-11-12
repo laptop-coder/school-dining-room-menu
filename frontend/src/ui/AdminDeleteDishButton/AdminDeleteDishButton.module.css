@@ -1,7 +1,7 @@
-.admin_edit_dish_button {
+.admin_delete_dish_button {
   height: 60px;
-  background-color: var(--indigo);
-  border: 1px solid var(--gray);
+  background-color: #b00;
+  border: none;
 
   display: flex;
   width: 100%;
@@ -15,6 +15,6 @@
   font-size: 20px;
 }
 
-.admin_edit_dish_button img {
+.admin_delete_dish_button img {
   height: 100%;
 }

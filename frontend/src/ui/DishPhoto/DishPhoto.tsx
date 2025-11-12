@@ -10,10 +10,7 @@ const DishPhoto = (
       src={props.src}
       title={props.title}
       class={styles.dish_photo}
-      onclick={(event) => {
-        event.stopPropagation();
-        event.target.requestFullscreen();
-      }}
+      onclick={(event) => event.target.requestFullscreen()}
     />
   </Show>
 );

@@ -7,11 +7,12 @@ import { ASSETS_ROUTE, STORAGE_ROUTE } from '../../utils/consts';
 import DishPhoto from '../../ui/DishPhoto/DishPhoto';
 import DishContainerItem from '../../ui/DishContainerItem/DishContainerItem';
 import AdminEditDishButton from '../../ui/AdminEditDishButton/AdminEditDishButton';
+import AdminDeleteDishButton from '../../ui/AdminDeleteDishButton/AdminDeleteDishButton';
 
 import { Motion } from 'solid-motionone';
 
 const DishContainer = (
-  props: Dish & { onclick?: Function; admin?: boolean },
+  props: Dish & { admin?: boolean; reloadDishesList: Function },
 ): JSX.Element => {
   const pathToPhoto = `${STORAGE_ROUTE}/${props.DishId}.jpeg`;
   const [dishPhotoIsAvailable, setDishPhotoIsAvailable] = createSignal(false);
@@ -25,8 +26,6 @@ const DishContainer = (
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      onclick={props.onclick}
-      style={props.onclick && { cursor: 'pointer' }}
     >
       <h2 class={styles.dish_container_title}>{props.DishName}</h2>
       <div class={styles.dish_container_content}>
@@ -57,7 +56,16 @@ const DishContainer = (
             title={`${props.DishName} (изображение)`}
           />
         )}
-        {props.admin && <AdminEditDishButton dishId={props.DishId} />}
+        {props.admin && (
+          <>
+            <AdminEditDishButton dishId={props.DishId} />
+            <AdminDeleteDishButton
+              dishId={props.DishId}
+              dishName={props.DishName}
+              reloadDishesList={props.reloadDishesList}
+            />
+          </>
+        )}
       </div>
     </Motion>
   );
