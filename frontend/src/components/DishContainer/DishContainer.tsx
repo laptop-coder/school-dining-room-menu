@@ -6,10 +6,13 @@ import checkPhotoAvailability from '../../utils/checkPhotoAvailability';
 import { ASSETS_ROUTE, STORAGE_ROUTE } from '../../utils/consts';
 import DishPhoto from '../../ui/DishPhoto/DishPhoto';
 import DishContainerItem from '../../ui/DishContainerItem/DishContainerItem';
+import AdminEditDishButton from '../../ui/AdminEditDishButton/AdminEditDishButton';
 
 import { Motion } from 'solid-motionone';
 
-const DishContainer = (props: Dish & { onclick?: Function }): JSX.Element => {
+const DishContainer = (
+  props: Dish & { onclick?: Function; admin?: boolean },
+): JSX.Element => {
   const pathToPhoto = `${STORAGE_ROUTE}/${props.DishId}.jpeg`;
   const [dishPhotoIsAvailable, setDishPhotoIsAvailable] = createSignal(false);
   checkPhotoAvailability({
@@ -54,6 +57,7 @@ const DishContainer = (props: Dish & { onclick?: Function }): JSX.Element => {
             title={`${props.DishName} (изображение)`}
           />
         )}
+        {props.admin && <AdminEditDishButton dishId={props.DishId} />}
       </div>
     </Motion>
   );

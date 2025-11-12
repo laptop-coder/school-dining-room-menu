@@ -63,6 +63,7 @@ const AdminDishesList = (props: {
           >
             {(item: Dish) => (
               <DishContainer
+                admin
                 {...item}
                 onclick={() => {
                   if (

@@ -1,0 +1,20 @@
+.admin_edit_dish_button {
+  height: 60px;
+  background-color: var(--indigo-1);
+  border: 1px solid var(--gray);
+
+  display: flex;
+  width: 100%;
+  max-width: 600px;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  color: var(--white);
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+.admin_edit_dish_button img {
+  height: 100%;
+}
