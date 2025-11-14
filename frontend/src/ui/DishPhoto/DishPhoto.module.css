@@ -1,3 +1,24 @@
+.dish_photo_wrapper {
+  position: relative;
+}
+
+.delete_dish_photo_button {
+  position: absolute;
+  display: flex;
+  right: 10px;
+  top: 10px;
+  border: 1px solid var(--gray);
+  background-color: var(--indigo);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delete_dish_photo_button img {
+  height: 40px;
+  width: 40px;
+  aspect-ratio: 1/1;
+}
+
 .dish_photo {
   border: 1px solid var(--gray);
   border-radius: 5px;

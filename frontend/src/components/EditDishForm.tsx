@@ -24,6 +24,7 @@ import type { ResourceReturn } from 'solid-js';
 import fileToBase64 from '../utils/fileToBase64';
 import { allSymbolsRegExpStr, allSymbolsRegExp } from '../utils/regExps';
 import editDish from '../utils/editDish';
+import deleteDishPhoto from '../utils/deleteDishPhoto';
 import checkPhotoAvailability from '../utils/checkPhotoAvailability';
 import { STORAGE_ROUTE } from '../utils/consts';
 
@@ -165,12 +166,20 @@ const EditDishForm = (props: { dishId: string }): JSX.Element => {
             }
           />
           {dishPhoto() ? (
-            <DishPhoto src={dishPhoto()} />
+            <DishPhoto
+              src={dishPhoto()}
+              deletePhoto={() => setDishPhoto('')}
+            />
           ) : (
             dishPhotoIsAvailable() && (
               <DishPhoto
                 src={pathToPhoto}
                 title={`${dishName()} (изображение)`}
+                deletePhoto={() => {
+                  deleteDishPhoto({ dishId: props.dishId }).then(() => {
+                    setDishPhotoIsAvailable(false);
+                  });
+                }}
               />
             )
           )}
