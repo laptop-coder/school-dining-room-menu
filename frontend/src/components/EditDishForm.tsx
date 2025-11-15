@@ -27,6 +27,7 @@ import editDish from '../utils/editDish';
 import deleteDishPhoto from '../utils/deleteDishPhoto';
 import checkPhotoAvailability from '../utils/checkPhotoAvailability';
 import { STORAGE_ROUTE } from '../utils/consts';
+import BackButton from './BackButton/BackButton';
 
 const EditDishForm = (props: { dishId: string }): JSX.Element => {
   const [dishPhotoIsAvailable, setDishPhotoIsAvailable] = createSignal(false);
@@ -86,6 +87,7 @@ const EditDishForm = (props: { dishId: string }): JSX.Element => {
         }
       >
         <Form onsubmit={handleSubmit}>
+          <BackButton />
           <Input
             placeholder='Название блюда*'
             name='dish_name'

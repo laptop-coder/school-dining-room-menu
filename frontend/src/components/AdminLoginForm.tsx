@@ -18,6 +18,7 @@ import AdminAuthFormOtherChoice from '../ui/AdminAuthFormOtherChoice/AdminAuthFo
 import AdminAuthFormTitle from '../ui/AdminAuthFormTitle/AdminAuthFormTitle';
 import axiosInstance from '../utils/axiosInstance';
 import { usernameRegExpStr, passwordRegExpStr } from '../utils/regExps';
+import BackButton from './BackButton/BackButton';
 
 const AdminLoginForm = (): JSX.Element => {
   const [username, setUsername] = createSignal('');
@@ -53,6 +54,7 @@ const AdminLoginForm = (): JSX.Element => {
 
   return (
     <Form onsubmit={handleSubmit}>
+      <BackButton />
       <AdminAuthFormTitle>Вход в аккаунт администратора</AdminAuthFormTitle>
       <Input
         placeholder='Имя пользователя'

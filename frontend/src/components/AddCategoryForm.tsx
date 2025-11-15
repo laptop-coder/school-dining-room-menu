@@ -4,6 +4,7 @@ import SubmitButton from '../ui/SubmitButton/SubmitButton';
 import Form from '../ui/Form/Form';
 import addCategory from '../utils/addCategory';
 import { allSymbolsRegExpStr } from '../utils/regExps';
+import BackButton from './BackButton/BackButton';
 
 const AddCategoryForm = (): JSX.Element => {
   const [categoryName, setCategoryName] = createSignal('');
@@ -15,6 +16,7 @@ const AddCategoryForm = (): JSX.Element => {
 
   return (
     <Form onsubmit={handleSubmit}>
+      <BackButton />
       <Input
         placeholder='Название категории*'
         name='category_name'

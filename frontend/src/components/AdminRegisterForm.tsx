@@ -17,6 +17,7 @@ import AdminAuthFormOtherChoice from '../ui/AdminAuthFormOtherChoice/AdminAuthFo
 import AdminAuthFormTitle from '../ui/AdminAuthFormTitle/AdminAuthFormTitle';
 import axiosInstance from '../utils/axiosInstance';
 import { usernameRegExpStr, passwordRegExpStr } from '../utils/regExps';
+import BackButton from './BackButton/BackButton';
 
 const AdminRegisterForm = (): JSX.Element => {
   const [username, setUsername] = createSignal('');
@@ -57,6 +58,7 @@ const AdminRegisterForm = (): JSX.Element => {
 
   return (
     <Form onsubmit={handleSubmit}>
+      <BackButton />
       <AdminAuthFormTitle>Создание аккаунта администратора</AdminAuthFormTitle>
       <Input
         placeholder='Имя пользователя'
