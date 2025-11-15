@@ -23,6 +23,7 @@ import type { ResourceReturn } from 'solid-js';
 import fileToBase64 from '../utils/fileToBase64';
 import { allSymbolsRegExpStr, allSymbolsRegExp } from '../utils/regExps';
 import BackButton from './BackButton/BackButton';
+import FormTitle from '../ui/FormTitle/FormTitle';
 
 const AddDishForm = (props: { defaultCategory?: string }): JSX.Element => {
   const [categoriesList]: ResourceReturn<string[]> =
@@ -53,6 +54,7 @@ const AddDishForm = (props: { defaultCategory?: string }): JSX.Element => {
   return (
     <Form onsubmit={handleSubmit}>
       <BackButton />
+      <FormTitle>Добавление блюда</FormTitle>
       <Input
         placeholder='Название блюда*'
         name='dish_name'

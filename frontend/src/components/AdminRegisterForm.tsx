@@ -14,7 +14,7 @@ import {
   USERNAME_MAX_LEN,
 } from '../utils/consts';
 import AdminAuthFormOtherChoice from '../ui/AdminAuthFormOtherChoice/AdminAuthFormOtherChoice';
-import AdminAuthFormTitle from '../ui/AdminAuthFormTitle/AdminAuthFormTitle';
+import FormTitle from '../ui/FormTitle/FormTitle';
 import axiosInstance from '../utils/axiosInstance';
 import { usernameRegExpStr, passwordRegExpStr } from '../utils/regExps';
 import BackButton from './BackButton/BackButton';
@@ -59,7 +59,7 @@ const AdminRegisterForm = (): JSX.Element => {
   return (
     <Form onsubmit={handleSubmit}>
       <BackButton />
-      <AdminAuthFormTitle>Создание аккаунта администратора</AdminAuthFormTitle>
+      <FormTitle>Создание аккаунта администратора</FormTitle>
       <Input
         placeholder='Имя пользователя'
         name='admin_register_form_username'
