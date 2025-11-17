@@ -44,7 +44,7 @@ func VerifyJWTAccess(accessToken *string, publicKey *rsa.PublicKey) (*string, er
 	case parsedToken.Valid:
 		sub, err := parsedToken.Claims.GetSubject()
 		if err != nil {
-			return nil, errors.New("can't get JWT refresh \"sub\" claim")
+			return nil, errors.New("can't get JWT access \"sub\" claim")
 		}
 		return &sub, nil
 	case errors.Is(err, jwt.ErrTokenMalformed):
