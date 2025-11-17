@@ -134,7 +134,10 @@ const AddDishForm = (props: { defaultCategory?: string }): JSX.Element => {
           )
         }
       />
-      <DishPhoto src={dishPhoto()} />
+      <DishPhoto
+        src={dishPhoto()}
+        deletePhoto={() => setDishPhoto('')}
+      />
       <SubmitButton name='add_dish_submit'>Добавить блюдо</SubmitButton>
     </Form>
   );
