@@ -14,6 +14,7 @@ RUN npx vite build
 FROM nginx:1.29.1-alpine3.22-slim
 WORKDIR app
 COPY nginx.conf.template .
+COPY assets /usr/share/nginx/html/storage/assets
 COPY --from=builder /app/dist /usr/share/nginx/html
 EXPOSE 29157
 COPY entrypoint.sh .
