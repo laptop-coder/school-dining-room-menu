@@ -88,7 +88,7 @@ func AdminLogin(w http.ResponseWriter, r *http.Request) {
 
 		accessToken, err := CreateJWTAccess(&adminAccountData.Username, privateKey)
 		if err != nil {
-			msg := "Error creating new JWT pair: " + err.Error()
+			msg := "Error creating new JWT access: " + err.Error()
 			Logger.Error(msg)
 			http.Error(w, msg, http.StatusInternalServerError)
 			return
