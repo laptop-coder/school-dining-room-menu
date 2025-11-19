@@ -11,7 +11,7 @@ import AdminAddItemButton from '../../ui/AdminAddItemButton/AdminAddItemButton';
 import { ADD_CATEGORY_ROUTE } from '../../utils/consts';
 
 const AdminCategoriesList = (): JSX.Element => {
-  const [categoriesList, { refetch: reloadDishesCategories }]: ResourceReturn<
+  const [categoriesList, { refetch: reloadCategoriesList }]: ResourceReturn<
     string[]
   > = createResource(fetchCategoriesList);
   return (
@@ -43,7 +43,7 @@ const AdminCategoriesList = (): JSX.Element => {
             {(item: string) => (
               <AdminCategoriesListItem
                 categoryName={item}
-                reloadCategoriesList={reloadDishesCategories}
+                reloadCategoriesList={reloadCategoriesList}
               />
             )}
           </For>
