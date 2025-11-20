@@ -31,13 +31,13 @@ func AddCategory(w http.ResponseWriter, r *http.Request) {
 
 	// Regular expressions checks
 	// Category name
-	isText, err := CheckStringSecurity(categoryName)
+	isSecure, err := CheckStringSecurity(categoryName)
 	if err != nil {
 		Logger.Error(err.Error())
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	if !(*isText) {
+	if !(*isSecure) {
 		msg := "Error. Found forbidden symbols in POST parameter \"categoryName\"."
 		Logger.Error(msg)
 		http.Error(w, msg, http.StatusBadRequest)

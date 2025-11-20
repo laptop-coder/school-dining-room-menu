@@ -35,13 +35,13 @@ func AddDish(w http.ResponseWriter, r *http.Request) {
 
 	// Regular expressions checks
 	// Dish name
-	isText, err := CheckStringSecurity(dishName)
+	isSecure, err := CheckStringSecurity(dishName)
 	if err != nil {
 		Logger.Error(err.Error())
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	if !(*isText) {
+	if !(*isSecure) {
 		msg := "Error. Found forbidden symbols in POST parameter \"dishName\"."
 		Logger.Error(msg)
 		http.Error(w, msg, http.StatusBadRequest)
@@ -49,13 +49,13 @@ func AddDish(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Dish category
-	isText, err = CheckStringSecurity(dishCategory)
+	isSecure, err = CheckStringSecurity(dishCategory)
 	if err != nil {
 		Logger.Error(err.Error())
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	if !(*isText) {
+	if !(*isSecure) {
 		msg := "Error. Found forbidden symbols in POST parameter \"dishCategory\"."
 		Logger.Error(msg)
 		http.Error(w, msg, http.StatusBadRequest)
@@ -63,13 +63,13 @@ func AddDish(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Dish description
-	isTextOrNumbers, err := CheckStringSecurity(dishDescription)
+	isSecureOrNumbers, err := CheckStringSecurity(dishDescription)
 	if err != nil {
 		Logger.Error(err.Error())
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	if !(*isTextOrNumbers) {
+	if !(*isSecureOrNumbers) {
 		msg := "Error. Found forbidden symbols in POST parameter \"dishDescription\"."
 		Logger.Error(msg)
 		http.Error(w, msg, http.StatusBadRequest)

@@ -35,13 +35,13 @@ func EditDish(w http.ResponseWriter, r *http.Request) {
 
 	// Regular expressions checks
 	// Dish id
-	isText, err := CheckStringSecurity(dishId)
+	isSecure, err := CheckStringSecurity(dishId)
 	if err != nil {
 		Logger.Error(err.Error())
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	if !(*isText) {
+	if !(*isSecure) {
 		msg := "Error. Found forbidden symbols in POST parameter \"dishId\"."
 		Logger.Error(msg)
 		http.Error(w, msg, http.StatusBadRequest)
@@ -49,13 +49,13 @@ func EditDish(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// New dish name
-	isText, err = CheckStringSecurity(newDishName)
+	isSecure, err = CheckStringSecurity(newDishName)
 	if err != nil {
 		Logger.Error(err.Error())
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	if !(*isText) {
+	if !(*isSecure) {
 		msg := "Error. Found forbidden symbols in POST parameter \"newDishName\"."
 		Logger.Error(msg)
 		http.Error(w, msg, http.StatusBadRequest)
@@ -63,13 +63,13 @@ func EditDish(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// New dish category
-	isText, err = CheckStringSecurity(newDishCategory)
+	isSecure, err = CheckStringSecurity(newDishCategory)
 	if err != nil {
 		Logger.Error(err.Error())
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	if !(*isText) {
+	if !(*isSecure) {
 		msg := "Error. Found forbidden symbols in POST parameter \"newDishCategory\"."
 		Logger.Error(msg)
 		http.Error(w, msg, http.StatusBadRequest)
@@ -77,13 +77,13 @@ func EditDish(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// New dish description
-	isTextOrNumbers, err := CheckStringSecurity(newDishDescription)
+	isSecureOrNumbers, err := CheckStringSecurity(newDishDescription)
 	if err != nil {
 		Logger.Error(err.Error())
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	if !(*isTextOrNumbers) {
+	if !(*isSecureOrNumbers) {
 		msg := "Error. Found forbidden symbols in POST parameter \"newDishDescription\"."
 		Logger.Error(msg)
 		http.Error(w, msg, http.StatusBadRequest)
