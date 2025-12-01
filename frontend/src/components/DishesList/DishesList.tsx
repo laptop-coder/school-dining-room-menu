@@ -12,7 +12,7 @@ import type { Accessor, ResourceReturn } from 'solid-js';
 import styles from './DishesList.module.css';
 import fetchDishesList from '../../utils/fetchDishesList';
 import type Dish from '../../types/dish';
-import DishContainer from '..//DishContainer/DishContainer';
+import DishContainer from '../DishContainer/DishContainer';
 import Loading from '../../ui/Loading/Loading';
 import Error from '../../ui/Error/Error';
 import NoData from '../../ui/NoData/NoData';
