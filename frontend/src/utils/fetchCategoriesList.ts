@@ -6,6 +6,9 @@ const fetchCategoriesList = async () =>
     .then((response) => {
       return response.data;
     })
-    .catch((error) => console.log(error));
+    .catch(
+      (error) => console.log('error'),
+      // console.log(error)
+    );
 
 export default fetchCategoriesList;

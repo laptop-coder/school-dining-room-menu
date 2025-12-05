@@ -8,6 +8,9 @@ const logout = async () =>
       window.location.href = ADMIN_ROUTE;
       return response.data;
     })
-    .catch((error) => console.log(error));
+    .catch(
+      (error) => console.log('error'),
+      // console.log(error)
+    );
 
 export default logout;

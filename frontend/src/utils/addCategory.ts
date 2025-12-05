@@ -16,6 +16,9 @@ const addCategory = async (props: { categoryName: string }) =>
       window.location.href = CATEGORY_MANAGEMENT_ROUTE;
       return response.data;
     })
-    .catch((error) => console.log(error));
+    .catch(
+      (error) => console.log('error'),
+      // console.log(error)
+    );
 
 export default addCategory;

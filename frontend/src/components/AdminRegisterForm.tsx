@@ -49,7 +49,8 @@ const AdminRegisterForm = (): JSX.Element => {
           alert(
             'Ошибка отправки. Возможно, аккаунт администратора уже создан. Если Вы уверены, что создаёте первый аккаунт, попробуйте ещё раз',
           );
-          console.log(error);
+          console.log('error');
+          // console.log(error);
         });
     } else {
       alert('Пароли не совпадают');

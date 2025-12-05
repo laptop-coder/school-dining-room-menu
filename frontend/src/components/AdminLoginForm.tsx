@@ -48,7 +48,8 @@ const AdminLoginForm = (): JSX.Element => {
         alert(
           'Ошибка отправки. Возможно, имя пользователя или пароль неверны. Попробуйте ещё раз',
         );
-        console.log(error);
+        console.log('error');
+        // console.log(error); // TODO: think about it, how to make right
       });
   };
 

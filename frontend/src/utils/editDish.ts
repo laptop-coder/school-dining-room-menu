@@ -23,6 +23,9 @@ const editDish = async (props: Dish) =>
       window.location.href = DISH_MANAGEMENT_ROUTE;
       return response.data;
     })
-    .catch((error) => console.log(error));
+    .catch(
+      (error) => console.log('error'),
+      // console.log(error)
+    );
 
 export default editDish;

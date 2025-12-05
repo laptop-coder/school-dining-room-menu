@@ -22,6 +22,9 @@ const changeDishAvailability = async (props: {
       props.reloadDishesList();
       return response.data;
     })
-    .catch((error) => console.log(error));
+    .catch(
+      (error) => console.log('error'),
+      // console.log(error)
+    );
 
 export default changeDishAvailability;
