@@ -6,7 +6,7 @@ import { ASSETS_ROUTE, EDIT_DISH_ROUTE } from '../../utils/consts';
 const AdminEditDishButton = (props: { dishId: string }): JSX.Element => (
   <button
     class={styles.admin_edit_dish_button}
-    onclick={(event) => {
+    onclick={() => {
       window.location.href = `${EDIT_DISH_ROUTE}?dish_id=${props.dishId}`;
     }}
     title='Редактировать блюдо'
