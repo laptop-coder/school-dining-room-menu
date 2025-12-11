@@ -82,7 +82,7 @@ func AuthMiddleware(next http.Handler) http.Handler {
 		}
 
 		var accessToken *string
-		accessTokenCookie, err := r.Cookie("jwt_access")
+		accessTokenCookie, err := r.Cookie("menu_jwt_access")
 		if err != nil {
 			msg := "Can't get JWT access from the cookie: " + err.Error() + ". If you are not logged in to your account yet, please log in."
 			Logger.Error(msg)

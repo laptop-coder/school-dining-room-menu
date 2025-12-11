@@ -98,7 +98,7 @@ func AdminLogin(w http.ResponseWriter, r *http.Request) {
 		http.SetCookie(
 			w,
 			&http.Cookie{
-				Name:     "jwt_access",
+				Name:     "menu_jwt_access",
 				Value:    *accessToken,
 				HttpOnly: true,
 				Path:     "/",                                 // TODO: is it OK?
@@ -111,7 +111,7 @@ func AdminLogin(w http.ResponseWriter, r *http.Request) {
 		http.SetCookie(
 			w,
 			&http.Cookie{
-				Name:     "authorized",
+				Name:     "menu_authorized",
 				Value:    "true",
 				HttpOnly: false,
 				Path:     "/",                                 // TODO: is it OK?
