@@ -17,4 +17,4 @@ COPY --from=builder /app/.vitepress/dist /usr/share/nginx/html
 EXPOSE 38458
 COPY entrypoint.sh .
 RUN chmod +x entrypoint.sh
-ENTRYPOINT /app/entrypoint.sh
+ENTRYPOINT [ "/app/entrypoint.sh" ]

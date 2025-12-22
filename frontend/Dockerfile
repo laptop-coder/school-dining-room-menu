@@ -18,4 +18,4 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 EXPOSE 29157
 COPY entrypoint.sh .
 RUN chmod +x entrypoint.sh
-ENTRYPOINT /app/entrypoint.sh
+ENTRYPOINT [ "/app/entrypoint.sh" ]
