@@ -1,0 +1,16 @@
+{
+  "name": "docs",
+  "version": "0.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/laptop-coder/school-dining-room-menu",
+  "type": "module",
+  "scripts": {
+    "docs:dev": "vitepress dev",
+    "docs:build": "vitepress build",
+    "docs:preview": "vitepress preview"
+  },
+  "description": "School dining room menu documentation",
+  "devDependencies": {
+    "vitepress": "^2.0.0-alpha.15"
+  }
+}

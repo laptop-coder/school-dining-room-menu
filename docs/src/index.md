@@ -1,0 +1,31 @@
+---
+# https://vitepress.dev/reference/default-theme-home-page
+layout: home
+
+hero:
+  name: "Меню для школьной столовой"
+  text: ""
+  tagline:
+  actions:
+    - theme: brand
+      text: Пользователь
+      link: /1-for-users/01-problem
+    - theme: alt
+      text: Администратор
+      link: /2-for-admins/01-for-whom
+    - theme: alt
+      text: Разработчик
+      link: /3-for-devs
+
+features:
+  - title: Сделаем фотографии блюд
+    details: Напишите и мы приедем
+    icon: 📷
+  - title: Адаптивный дизайн
+    details: Не «ломается» на телефоне
+    icon: 📱
+  - title: Технологии контейнеризации
+    details: Легко развернуть на сервере
+    icon: 🐋
+---
+
