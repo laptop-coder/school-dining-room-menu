@@ -42,6 +42,19 @@ services:
     networks:
       - menu_network
 
+  docs:
+    image: laptopcoder/school-dining-room-menu-docs:latest
+    container_name: menu-docs
+    restart: always
+    volumes:
+      - /etc/localtime:/etc/localtime
+    env_file:
+      - .env
+    ports:
+      - "${DOCS_PORT:-38458}:${DOCS_PORT:-38458}"
+    networks:
+      - menu_network
+
 networks:
   menu_network:
     driver: bridge
