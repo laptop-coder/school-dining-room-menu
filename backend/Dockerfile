@@ -12,4 +12,4 @@ RUN GOOS=linux go build -o main .
 FROM debian:12.11-slim
 COPY --from=builder /app/main /app/main
 EXPOSE 14536
-CMD ["/app/main"]
+CMD [ "/app/main" ]
