@@ -2,9 +2,10 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "Меню для школьной столовой",
-  description: "",
-  srcDir: "./src",
+  lang: 'ru-RU',
+  title: 'Меню для школьной столовой',
+  description: '',
+  srcDir: './src',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
@@ -43,5 +44,54 @@ export default defineConfig({
     socialLinks: [
       { icon: 'github', link: 'https://github.com/laptop-coder/school-dining-room-menu' }
     ],
+
+    docFooter: {
+      prev: 'Предыдущая страница',
+      next: 'Следующая страница'
+    },
+
+    search: {
+      provider: 'local',
+      options: {
+        translations: {
+          button: {
+            buttonText: 'Поиск',
+            buttonAriaLabel: 'Поиск'
+          },
+          modal: {
+            displayDetails: 'Показать подробности',
+            resetButtonTitle: 'Сбросить поиск',
+            backButtonTitle: 'Закрыть поиск',
+            noResultsText: 'Ничего не найдено по запросу',
+            footer: {
+              selectText: 'выбрать',
+              navigateText: 'перейти',
+              closeText: 'закрыть'
+            }
+          }
+        }
+      }
+    },
+
+    outline: {
+      label: 'Содержание',
+      level: [2, 3]
+    },
+
+    editLink: {
+      pattern: 'https://github.com/laptop-coder/school-dining-room-menu/edit/main/docs/src/:path',
+      text: 'Редактировать эту страницу на GitHub'
+    },
+
+    footer: {
+      message: '',
+      copyright: '© Лицей № 369, 2025'
+    },
+
+    darkModeSwitchLabel: 'Тема',
+    lightModeSwitchTitle: 'Переключить на светлую тему',
+    darkModeSwitchTitle: 'Переключить на темную тему',
+    sidebarMenuLabel: 'Меню',
+    returnToTopLabel: 'Вернуться наверх',
   },
 })
