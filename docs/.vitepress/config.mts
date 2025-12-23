@@ -37,6 +37,10 @@ export default defineConfig({
       {
         text: 'Для разработчиков',
         items: [
+          { text: 'Для кого этот раздел?', link: '/3-for-devs/01-for-whom.md' },
+          { text: 'Начало работы. Подготовка', link: '/3-for-devs/02-getting-started.md' },
+          { text: 'Запуск на сервере', link: '/3-for-devs/03-launch.md' },
+          { text: 'CI/CD', link: '/3-for-devs/04-ci-cd.md' },
         ]
       }
     ],
