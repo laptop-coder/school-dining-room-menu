@@ -23,24 +23,30 @@ export default defineConfig({
         ]
       },
       {
+        text: 'Для сотрудников',
+        items: [
+          { text: 'Для кого этот раздел?', link: '/2-for-staff/01-for-whom.md' },
+          { text: 'Начало работы: создание аккаута администратора', link: '/2-for-staff/02-getting-started.md' },
+          { text: 'Главная страница администратора', link: '/2-for-staff/03-home-page.md' },
+          { text: 'Управление категориями', link: '/2-for-staff/04-categories-management.md' },
+          { text: 'Управление блюдами', link: '/2-for-staff/05-dishes-management.md' },
+          { text: 'Управление наличием блюд', link: '/2-for-staff/06-dishes-availability.md' },
+          { text: 'Фотографии блюд', link: '/2-for-staff/07-dishes-photos.md' },
+        ]
+      },
+      {
         text: 'Для администраторов',
         items: [
-          { text: 'Для кого этот раздел?', link: '/2-for-admins/01-for-whom.md' },
-          { text: 'Начало работы: создание аккаута администратора', link: '/2-for-admins/02-getting-started.md' },
-          { text: 'Главная страница администратора', link: '/2-for-admins/03-home-page.md' },
-          { text: 'Управление категориями', link: '/2-for-admins/04-categories-management.md' },
-          { text: 'Управление блюдами', link: '/2-for-admins/05-dishes-management.md' },
-          { text: 'Управление наличием блюд', link: '/2-for-admins/06-dishes-availability.md' },
-          { text: 'Фотографии блюд', link: '/2-for-admins/07-dishes-photos.md' },
+          { text: 'Для кого этот раздел?', link: '/3-for-admins/01-for-whom.md' },
+          { text: 'Начало работы. Подготовка', link: '/3-for-admins/02-getting-started.md' },
+          { text: 'Запуск на сервере', link: '/3-for-admins/03-launch.md' },
+          { text: 'CI/CD', link: '/3-for-admins/04-ci-cd.md' },
         ]
       },
       {
         text: 'Для разработчиков',
         items: [
-          { text: 'Для кого этот раздел?', link: '/3-for-devs/01-for-whom.md' },
-          { text: 'Начало работы. Подготовка', link: '/3-for-devs/02-getting-started.md' },
-          { text: 'Запуск на сервере', link: '/3-for-devs/03-launch.md' },
-          { text: 'CI/CD', link: '/3-for-devs/04-ci-cd.md' },
+          { text: 'Для кого этот раздел?', link: '/4-for-devs/01-for-whom.md' },
         ]
       }
     ],

@@ -11,11 +11,14 @@ hero:
       text: Пользователь
       link: /1-for-users/01-problem
     - theme: alt
+      text: Сотрудник
+      link: /2-for-staff/01-for-whom
+    - theme: alt
       text: Администратор
-      link: /2-for-admins/01-for-whom
+      link: /3-for-admins/01-for-whom
     - theme: alt
       text: Разработчик
-      link: /3-for-devs
+      link: /4-for-devs/01-for-whom
 
 features:
   - title: Сделаем фотографии блюд
