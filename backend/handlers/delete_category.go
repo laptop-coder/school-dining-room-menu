@@ -43,7 +43,7 @@ func DeleteCategory(w http.ResponseWriter, r *http.Request) {
 	Logger.Info(msg)
 	w.Write([]byte(msg))
 
-	BroadcastMenuUpdate()
+	BroadcastTVMenuUpdate()
 	msg = "Success. Broacasted menu updates to the WebSocket clients"
 	Logger.Info(msg)
 	w.Write([]byte(msg))

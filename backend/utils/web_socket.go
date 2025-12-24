@@ -29,7 +29,7 @@ var (
 	}
 )
 
-func BroadcastMenuUpdate() {
+func BroadcastTVMenuUpdate() {
 	items, err := GetMenuItemsTV()
 	if err != nil {
 		Logger.Error("Error getting dishes list for broadcasting to TVs: " + err.Error())
