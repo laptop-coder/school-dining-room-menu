@@ -4,7 +4,7 @@
 ```sh
 git clone https://github.com/laptop-coder/school-dining-room-menu.git
 ```
-2. Установите переменные окружения
+2. Установите переменные окружения. В `ORIGINS` укажите через пробел домены, на которых запущен сайт.
 ```sh
 cp .env.example .env
 vi .env
