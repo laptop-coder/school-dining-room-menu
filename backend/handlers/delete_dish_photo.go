@@ -46,7 +46,7 @@ func DeleteDishPhoto(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(msg))
 
 	BroadcastTVMenuUpdate()
-	msg = "Success. Broacasted menu updates to the WebSocket clients"
+	msg = "Success. Broadcasted menu updates to the WebSocket TV clients"
 	Logger.Info(msg)
 	w.Write([]byte(msg))
 }

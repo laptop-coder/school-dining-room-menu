@@ -15,20 +15,20 @@ func HandleWebSocket(w http.ResponseWriter, r *http.Request) {
 	}
 	defer conn.Close()
 	// Register new client
-	ClientsLock.Lock()
-	Clients[conn] = true
-	ClientsLock.Unlock()
+	TVClientsLock.Lock()
+	TVClients[conn] = true
+	TVClientsLock.Unlock()
 
-	Logger.Info(fmt.Sprintf("New client has been connected. Now %d clients are connected.", len(Clients)))
+	Logger.Info(fmt.Sprintf("New TV client has been connected. Now %d clients are connected.", len(TVClients)))
 	for {
 		// you can use this loop for ping-pong and other messages
 		_, _, err := conn.ReadMessage()
 		if err != nil {
 			// Client was disconnected
-			ClientsLock.Lock()
-			delete(Clients, conn)
-			ClientsLock.Unlock()
-			Logger.Info(fmt.Sprintf("Client has been disconnected. Now %d clients are connected.", len(Clients)))
+			TVClientsLock.Lock()
+			delete(TVClients, conn)
+			TVClientsLock.Unlock()
+			Logger.Info(fmt.Sprintf("TV client has been disconnected. Now %d clients are connected.", len(TVClients)))
 			break
 		}
 	}

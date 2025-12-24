@@ -10,8 +10,8 @@ import (
 )
 
 var (
-	Clients     = make(map[*websocket.Conn]bool)
-	ClientsLock sync.Mutex
+	TVClients     = make(map[*websocket.Conn]bool)
+	TVClientsLock sync.Mutex
 	Upgrader    = websocket.Upgrader{
 		CheckOrigin: func(r *http.Request) bool {
 			origin := r.Header.Get("Origin")
@@ -40,14 +40,14 @@ func BroadcastTVMenuUpdate() {
 		Logger.Error("Error converting dishes list (for broadcasting to TVs) to JSON: " + err.Error())
 		return
 	}
-	ClientsLock.Lock()
-	defer ClientsLock.Unlock()
-	for client := range Clients {
-		err := client.WriteMessage(websocket.TextMessage, data)
+	TVClientsLock.Lock()
+	defer TVClientsLock.Unlock()
+	for tvClient := range TVClients {
+		err := tvClient.WriteMessage(websocket.TextMessage, data)
 		if err != nil {
 			Logger.Error("Error sending new dishes list to client (TV): " + err.Error())
-			client.Close()
-			delete(Clients, client)
+			tvClient.Close()
+			delete(TVClients, tvClient)
 		}
 	}
 	Logger.Info("New dishes list was broadcast to all clients (TVs)")
