@@ -17,8 +17,10 @@ func main() {
 	mux := http.NewServeMux()
 
 	// For all users
+	mux.Handle("/ws", http.HandlerFunc(handlers.HandleWebSocket))
 	mux.Handle("/categories/get_list", http.HandlerFunc(handlers.GetCategoriesList))
 	mux.Handle("/dishes/get_list", http.HandlerFunc(handlers.GetDishesList))
+	mux.Handle("/dishes/get_list/tv", http.HandlerFunc(handlers.GetDishesListTV))
 	mux.Handle("/admin/register", http.HandlerFunc(handlers.AdminRegister))
 	mux.Handle("/admin/login", http.HandlerFunc(handlers.AdminLogin))
 	mux.Handle("/admin/logout", http.HandlerFunc(handlers.AdminLogout))

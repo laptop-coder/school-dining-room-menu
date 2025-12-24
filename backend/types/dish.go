@@ -7,3 +7,8 @@ type Dish struct {
 	DishDescription string
 	DishAvailable   int
 }
+
+type DishTVMenu struct {
+	DishCategory string
+	DishName     string
+}

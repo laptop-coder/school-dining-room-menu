@@ -115,4 +115,9 @@ func EditDish(w http.ResponseWriter, r *http.Request) {
 	msg := "Success. Updated the dish"
 	Logger.Info(msg)
 	w.Write([]byte(msg))
+
+	BroadcastMenuUpdate()
+	msg = "Success. Broacasted menu updates to the WebSocket clients"
+	Logger.Info(msg)
+	w.Write([]byte(msg))
 }

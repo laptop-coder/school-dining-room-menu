@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 )
 
 func newConfig() *types.Config {
@@ -12,6 +13,7 @@ func newConfig() *types.Config {
 		App: types.AppConfig{
 			PortBackend:  "14536",
 			PortFrontend: getEnv("FRONTEND_PORT"),
+			Origins:      strings.Fields(getEnv("ORIGINS")),
 		},
 		DB: types.DBConfig{
 			PathTo: getEnv("PATH_TO_DB"),

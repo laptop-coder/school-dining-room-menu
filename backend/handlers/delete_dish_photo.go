@@ -44,4 +44,9 @@ func DeleteDishPhoto(w http.ResponseWriter, r *http.Request) {
 	msg := "Success. If a dish with the passed \"dishId\" had a photo, it was deleted"
 	Logger.Info(msg)
 	w.Write([]byte(msg))
+
+	BroadcastMenuUpdate()
+	msg = "Success. Broacasted menu updates to the WebSocket clients"
+	Logger.Info(msg)
+	w.Write([]byte(msg))
 }

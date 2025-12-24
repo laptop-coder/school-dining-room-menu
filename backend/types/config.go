@@ -3,6 +3,7 @@ package types
 type AppConfig struct {
 	PortBackend  string
 	PortFrontend string
+	Origins      []string
 }
 
 type DBConfig struct {
