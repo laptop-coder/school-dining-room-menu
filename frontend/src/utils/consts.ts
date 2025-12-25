@@ -2,6 +2,7 @@ export const ADMIN_ROUTE = '/' + '1b75e3c7-4c17-4c5a-a701-e13953a38ad4';
 export const ADMIN_LOGIN_ROUTE = ADMIN_ROUTE + '/login';
 export const ADMIN_REGISTER_ROUTE = ADMIN_ROUTE + '/register';
 export const HOME_ROUTE = '/';
+export const TV_ROUTE = '/tv';
 export const CATEGORY_MANAGEMENT_ROUTE = ADMIN_ROUTE + '/category_management';
 export const DISH_MANAGEMENT_ROUTE = ADMIN_ROUTE + '/dish_management';
 export const DISH_AVAILABILITY_MANAGEMENT_ROUTE =

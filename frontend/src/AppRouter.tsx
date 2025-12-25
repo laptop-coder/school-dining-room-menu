@@ -3,6 +3,7 @@ import { JSX } from 'solid-js';
 import { Router, Route } from '@solidjs/router';
 
 import HomePage from './pages/Home';
+import TVPage from './pages/TV';
 import AdminPage from './pages/Admin';
 import CategoryManagementPage from './pages/CategoryManagement';
 import AddCategoryPage from './pages/AddCategory';
@@ -14,6 +15,7 @@ import AdminLoginPage from './pages/AdminLogin';
 import AdminRegisterPage from './pages/AdminRegister';
 import {
   HOME_ROUTE,
+  TV_ROUTE,
   ADMIN_ROUTE,
   CATEGORY_MANAGEMENT_ROUTE,
   DISH_MANAGEMENT_ROUTE,
@@ -31,6 +33,10 @@ const AppRouter = (): JSX.Element => {
       <Route
         path={HOME_ROUTE}
         component={HomePage}
+      />
+      <Route
+        path={TV_ROUTE}
+        component={TVPage}
       />
       <Route
         path={CATEGORY_MANAGEMENT_ROUTE}

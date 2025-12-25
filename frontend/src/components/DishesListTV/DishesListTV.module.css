@@ -1,0 +1,22 @@
+.dishes_list_tv_wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 20px;
+  align-items: center;
+  gap: 20px;
+}
+
+.dishes_list_tv,
+.dishes_list_tv_fullscreen {
+  justify-content: center;
+  background-color: var(--indigo-2);
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.dishes_list_tv_fullscreen {
+  margin-top: 100px;
+}
