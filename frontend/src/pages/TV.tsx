@@ -1,6 +1,6 @@
 import { JSX, createSignal } from 'solid-js';
 
-import DishesListTV from '../components/DishesListTV/DishesListTV';
+import TVMenu from '../components/TVMenu/TVMenu';
 import Page from '../ui/Page/Page';
 import Footer from '../components/Footer/Footer';
 import Header from '../components/Header/Header';
@@ -12,7 +12,7 @@ const TVPage = (): JSX.Element => {
     <Page>
       <Header />
       <Content>
-        <DishesListTV
+        <TVMenu
           isFullscreen={isFullscreen()}
           setIsFullscreen={setIsFullscreen}
         />

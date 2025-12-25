@@ -13,7 +13,7 @@ import type { Accessor, Setter, ResourceReturn } from 'solid-js';
 
 import fetchDishesListTV from '../../utils/fetchDishesListTV';
 import type DishTV from '../../types/dishTV'; // TODO: join into one file with Dish
-import DishAvailabilityListItem from '../../ui/DishAvailabilityListItem/DishAvailabilityListItem';
+import TVMenuItem from '../../ui/TVMenuItem/TVMenuItem';
 import Loading from '../../ui/Loading/Loading';
 import Error from '../../ui/Error/Error';
 import NoData from '../../ui/NoData/NoData';
@@ -21,9 +21,9 @@ import AdminActionButton from '../../ui/AdminActionButton/AdminActionButton';
 import { ASSETS_ROUTE } from '../../utils/consts';
 import getBackendURL from '../../utils/getBackendURL';
 
-import styles from './DishesListTV.module.css';
+import styles from './TVMenu.module.css';
 
-const DishesListTV = (props: {
+const TVMenu = (props: {
   isFullscreen: boolean;
   setIsFullscreen: Setter<boolean>;
 }): JSX.Element => {
@@ -62,7 +62,7 @@ const DishesListTV = (props: {
   let socket: WebSocket | null = null;
   const connectWebSocket = () => {
     socket = new WebSocket(
-      `ws://${getBackendURL().replace('http://', '').replace('https://', '')}/ws`,
+      `ws://${getBackendURL().replace('http://', '').replace('https://', '')}/ws`, // TODO: rewrite
     );
     socket.onopen = () => {
       setWebSocketConnected(true);
@@ -108,7 +108,7 @@ const DishesListTV = (props: {
   });
 
   return (
-    <div class={styles.dishes_list_tv_wrapper}>
+    <div class={styles.tv_menu_wrapper}>
       {!props.isFullscreen && (
         <AdminActionButton
           action={() => {
@@ -123,8 +123,8 @@ const DishesListTV = (props: {
       <div
         class={
           props.isFullscreen
-            ? styles.dishes_list_tv_fullscreen
-            : styles.dishes_list_tv
+            ? styles.tv_menu_fullscreen
+            : styles.tv_menu
         }
       >
         <Switch fallback={<Loading />}>
@@ -149,4 +149,4 @@ const DishesListTV = (props: {
   );
 };
 
-export default DishesListTV;
+export default TVMenu;
