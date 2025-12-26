@@ -107,6 +107,19 @@ const TVMenu = (props: {
     }
   });
 
+  const formatData = (data: DishTV[]) => {
+    return data.reduce(
+      (acc, dish) => {
+        if (!acc[dish.DishCategory]) {
+          acc[dish.DishCategory] = [];
+        }
+        acc[dish.DishCategory].push(dish.DishName);
+        return acc;
+      },
+      {} as Record<string, string[]>,
+    );
+  };
+
   return (
     <div class={styles.tv_menu_wrapper}>
       {!props.isFullscreen && (
@@ -121,11 +134,7 @@ const TVMenu = (props: {
         />
       )}
       <div
-        class={
-          props.isFullscreen
-            ? styles.tv_menu_fullscreen
-            : styles.tv_menu
-        }
+        class={props.isFullscreen ? styles.tv_menu_fullscreen : styles.tv_menu}
       >
         <Switch fallback={<Loading />}>
           <Match when={state() === 'unresolved' || state() === 'pending'}>
@@ -133,11 +142,17 @@ const TVMenu = (props: {
           </Match>
           <Match when={state() === 'ready' || state() === 'refreshing'}>
             <For
-              each={data() as DishTV[]}
+              each={Object.entries(formatData(data() as DishTV[]))}
               fallback={<NoData />}
             >
-              {/*(item: DishTV) => <DishContainer {...item} />*/}
-              {(item: DishTV) => <>{item.DishName}</>}
+              {([category, dishesList]) => (
+                <TVMenuItem
+                  {...{
+                    dishesCategory: category,
+                    dishesList: dishesList,
+                  }}
+                />
+              )}
             </For>
           </Match>
           <Match when={state() === 'errored'}>

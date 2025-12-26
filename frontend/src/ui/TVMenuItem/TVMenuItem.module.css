@@ -1,0 +1,32 @@
+.tv_menu_item {
+  width: 100%;
+  height: 100%;
+  color: var(--white);
+  border-radius: 10px;
+  padding: 20px;
+  box-sizing: border-box;
+  font-size: 35px;
+  border: 2px solid var(--white);
+}
+
+.tv_menu_item:nth-child(3n) {
+  grid-row: span 2;
+}
+
+.tv_menu_item_header {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.tv_menu_item_content {
+  display: flex;
+  flex-direction: column;
+}
+
+.tv_menu_item,
+.tv_menu_item_header,
+.tv_menu_item_content {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
