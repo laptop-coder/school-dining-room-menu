@@ -12,7 +12,7 @@ import (
 var (
 	TVClients     = make(map[*websocket.Conn]bool)
 	TVClientsLock sync.Mutex
-	Upgrader    = websocket.Upgrader{
+	Upgrader      = websocket.Upgrader{
 		CheckOrigin: func(r *http.Request) bool {
 			origin := r.Header.Get("Origin")
 			// TODO: use slices.Contains instead of loop
