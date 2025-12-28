@@ -57,14 +57,14 @@ const DishContainer = (
           />
         )}
         {props.admin && (
-          <>
+          <div class={styles.dish_container_buttons_group}>
             <AdminEditDishButton dishId={props.DishId} />
             <AdminDeleteDishButton
               dishId={props.DishId}
               dishName={props.DishName}
               reloadDishesList={props.reloadDishesList}
             />
-          </>
+          </div>
         )}
       </div>
     </Motion>
