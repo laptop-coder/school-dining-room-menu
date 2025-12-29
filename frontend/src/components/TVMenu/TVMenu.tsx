@@ -62,7 +62,7 @@ const TVMenu = (props: {
   let socket: WebSocket | null = null;
   const connectWebSocket = () => {
     socket = new WebSocket(
-      `ws://${getBackendURL().replace('http://', '').replace('https://', '')}/ws`, // TODO: rewrite
+      `wss://${getBackendURL().replace('http://', '').replace('https://', '')}/ws`, // TODO: rewrite
     );
     socket.onopen = () => {
       setWebSocketConnected(true);
