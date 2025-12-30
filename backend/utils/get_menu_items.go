@@ -7,7 +7,7 @@ import (
 
 // TODO: maybe add other code to get menu items here, in one place (file)
 func GetMenuItemsTV() ([]types.DishTVMenu, error) {
-	rows, err := DB.Query("SELECT dish_category, dish_name FROM dish ORDER BY dish_name;")
+	rows, err := DB.Query("SELECT dish_category, dish_name FROM dish WHERE dish_available=1 ORDER BY dish_name;")
 	if err != nil {
 		return nil, err
 	}
