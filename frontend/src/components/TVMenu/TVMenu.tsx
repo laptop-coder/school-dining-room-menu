@@ -63,10 +63,11 @@ const TVMenu = (props: {
   const connectWebSocket = () => {
     // TODO: move to a separate function, e.g. getWebSocketURL
     socket = new WebSocket(
-      new URL('/ws',
+      new URL(
+        '/ws',
         (location.protocol === 'https:' ? 'wss://' : 'ws://') +
-        new URL(getBackendURL()).host
-      ).toString()
+          new URL(getBackendURL()).host,
+      ).toString(),
     );
     socket.onopen = () => {
       setWebSocketConnected(true);
