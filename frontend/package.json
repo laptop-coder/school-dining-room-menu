@@ -20,5 +20,8 @@
     "axios": "^1.11.0",
     "solid-js": "^1.9.5",
     "solid-motionone": "^1.0.4"
+  },
+  "allowScripts": {
+    "esbuild@0.25.12": true
   }
 }
