@@ -1,13 +1,13 @@
 #!/bin/sh
 
-docker-compose -f "${HOME}/school-dining-room-menu/compose.yaml" down
+cd "${HOME}/school-dining-room-menu"
 
-docker rmi laptopcoder/school-dining-room-menu-backend:latest > /dev/null
-docker rmi laptopcoder/school-dining-room-menu-frontend:latest  > /dev/null
-docker rmi laptopcoder/school-dining-room-menu-docs:latest  > /dev/null
+OLD=$(docker compose images -q backend frontend docs)
+docker compose pull backend frontend docs
+NEW=$(docker compose images -q backend frontend docs)
 
-docker pull laptopcoder/school-dining-room-menu-backend:latest > /dev/null
-docker pull laptopcoder/school-dining-room-menu-frontend:latest  > /dev/null
-docker pull laptopcoder/school-dining-room-menu-docs:latest  > /dev/null
+if [ "$OLD" != "$NEW" ]; then
+    make down
+    make deploy
+fi
 
-docker-compose -f "${HOME}/school-dining-room-menu/compose.yaml" up -d
