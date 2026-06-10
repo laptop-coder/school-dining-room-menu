@@ -12,5 +12,8 @@
   "description": "School dining room menu documentation",
   "devDependencies": {
     "vitepress": "^2.0.0-alpha.15"
+  },
+  "allowScripts": {
+    "esbuild@0.27.7": true
   }
 }

@@ -2,7 +2,7 @@
 
 Menu for the school dining room.
 
-[![Latest](https://img.shields.io/github/v/release/laptop-coder/school-dining-room?style=flat-square&label=latest)](https://github.com/laptop-coder/school-dining-room/releases) [![Release](https://img.shields.io/github/actions/workflow/status/laptop-coder/school-dining-room/release.yaml?branch=main&style=flat-square&label=release)](https://github.com/laptop-coder/school-dining-room/actions/workflows/release.yaml)
+[![Latest](https://img.shields.io/github/v/release/laptop-coder/school-dining-room-menu?style=flat-square&label=latest)](https://github.com/laptop-coder/school-dining-room-menu/releases) [![Release](https://img.shields.io/github/actions/workflow/status/laptop-coder/school-dining-room-menu/release.yaml?branch=main&style=flat-square&label=release)](https://github.com/laptop-coder/school-dining-room-menu/actions/workflows/release.yaml)
 
 ## Tech Stack
 
@@ -13,8 +13,8 @@ Menu for the school dining room.
 ## Getting Started
 ```bash
 # Clone the repository
-git clone https://github.com/laptop-coder/school-dining-room.git
-cd ./school-dining-room
+git clone https://github.com/laptop-coder/school-dining-room-menu.git
+cd ./school-dining-room-menu
 # Set up env variables
 cp .env.example .env
 vi .env
