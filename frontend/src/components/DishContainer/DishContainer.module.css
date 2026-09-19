@@ -1,12 +1,14 @@
 .dish_container {
   background-color: var(--indigo);
   color: var(--white);
-  border-radius: 5px;
+  border-radius: 15px;
   padding: 20px;
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 15px;
+  box-shadow: var(--shadow);
+  border: none;
 }
 
 .dish_container_title {

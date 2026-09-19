@@ -10,7 +10,7 @@
 .attach_file_label {
   display: flex;
   border: 1px solid var(--gray);
-  border-radius: 5px;
+  border-radius: 15px;
   background-color: var(--indigo);
   font-size: 25px;
   height: 70px;

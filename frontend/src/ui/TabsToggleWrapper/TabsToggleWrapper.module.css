@@ -3,8 +3,10 @@
   position: relative;
   background-color: var(--indigo);
   height: 100px;
-  width: 100%;
+  width: 95%;
   overflow-x: auto;
+  border-radius: 15px;
+  margin-bottom: 5px;
 }
 
 .tabs_toggle_wrapper_fullscreen {

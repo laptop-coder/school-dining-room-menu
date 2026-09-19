@@ -5,7 +5,7 @@
   background-color: var(--indigo);
   color: var(--white);
   border: none;
-  border-radius: 5px;
+  border-radius: 15px;
   font-size: 25px;
   cursor: pointer;
   display: flex;

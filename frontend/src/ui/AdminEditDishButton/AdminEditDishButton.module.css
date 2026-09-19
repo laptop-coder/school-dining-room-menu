@@ -1,7 +1,8 @@
 .admin_edit_dish_button {
   height: 60px;
   background-color: var(--indigo);
-  border: 1px solid var(--gray);
+  box-shadow: var(--shadow);
+  border: none;
 
   display: flex;
   width: 100%;
@@ -11,7 +12,7 @@
   align-items: center;
   color: var(--white);
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 15px;
   font-size: 20px;
 }
 
