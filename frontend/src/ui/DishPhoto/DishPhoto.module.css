@@ -7,9 +7,10 @@
   display: flex;
   right: 10px;
   top: 10px;
-  border: 1px solid var(--gray);
+  box-shadow: var(--shadow);
+  border: none;
   background-color: var(--indigo);
-  border-radius: 5px;
+  border-radius: 15px;
   cursor: pointer;
 }
 
@@ -20,8 +21,8 @@
 }
 
 .dish_photo {
-  border: 1px solid var(--gray);
-  border-radius: 5px;
+  border: none;
+  border-radius: 15px;
   cursor: pointer;
   width: 100%;
 }

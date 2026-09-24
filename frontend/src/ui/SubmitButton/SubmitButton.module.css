@@ -1,8 +1,9 @@
 .submit_button {
   height: 70px;
   width: 100%;
-  border-radius: 5px;
-  border: 1px solid var(--gray);
+  border-radius: 15px;
+  box-shadow: var(--shadow);
+  border: none;
   background-color: var(--indigo);
   color: var(--white);
   padding: 10px;

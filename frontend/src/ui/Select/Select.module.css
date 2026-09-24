@@ -7,7 +7,7 @@
 .select {
   background-color: var(--indigo);
   border: 1px solid var(--gray);
-  border-radius: 10px;
+  border-radius: 15px;
   height: 70px;
   font-size: 25px;
   padding: 10px;
