@@ -8,6 +8,7 @@
 
 body {
   overflow-y: scroll;
+  background-color: var(--indigo-2);
 }
 
 :root {
